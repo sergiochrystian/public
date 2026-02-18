@@ -1,0 +1,317 @@
+:root {
+    --primary-color: #28a745;
+    /* O verde que vimos na foto 4 */
+    --dark-bg: #000;
+    --gray-bg: #f8f9fa;
+}
+
+/* O Fundo cinza de fora */
+/* body {
+    /* Substitua pelo caminho da sua imagem de fundo 
+    background-image: url('../assets/background_pattern.jpg');
+    background-size: cover;
+    /* backdrop-filter: blur(5px); 
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+} */
+
+body {
+    /* 1. O caminho da imagem que você definiu */
+    background-image: url('../assets/background_pattern.jpg'); 
+    
+    /* 2. O PULO DO GATO: Mude de 'cover' para um tamanho fixo (ex: 200px) */
+    /* Isso define o tamanho de cada "quadradinho" da sua estampa */
+    background-size: 200px; 
+
+    /* 3. Ativa a repetição nos dois sentidos */
+    background-repeat: repeat; 
+
+    /* 4. Mantém o fundo fixo enquanto o cardápio rola */
+    background-attachment: fixed;
+
+    /* 5. Se quiser manter o efeito de desfoque (blur) */
+    /* backdrop-filter: blur(2px);  */
+
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 100%;
+    /* Aumentamos aqui para ficar mais largo, como você pediu */
+    max-width: 650px; 
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Sombra mais elegante e espalhada */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); 
+    position: relative;
+}
+
+/* A Folha Branca (App) */
+.container-principal {
+    width: 100%;
+    max-width: 900px;    /* Largura fixa de um celular */
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Ajuste do Header para não sobrar espaço */
+#store-header {
+    width: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho */
+}
+
+
+#store-logo {
+    height: 50px; /* Tamanho que vimos que fica bom */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Container Principal: Dando respiro ao conteúdo */
+.container {
+    padding: 20px;
+    max-width: 600px; /* Largura ideal para simular celular no PC */
+    margin: 0 auto;
+}
+
+/* Caixa de Busca e Repetir */
+.search-box {
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.2);
+}
+
+.repeat-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-repeat {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+
+
+/* O Card do Produto (Foto 4) */
+.product-card {
+    background: white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-buy {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.icon-circle.error { border-color: #dc3545; }
+.icon-circle.error span { color: #dc3545; }
+.btn-error {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.tela-cheia {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: white;
+    z-index: 4000;
+    display: flex;
+    flex-direction: column;
+}
+
+.carrinho-itens {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.carrinho-resumo {
+    padding: 20px;
+    border-top: 2px solid #eee;
+    background: #fdfdfd;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.btn-finalizar {
+    background: #28a745;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+/* FOOTER - Ajuste do Carrinho para não fugir da folha branca */
+#cart-footer {
+    position: absolute; /* Mude de fixed para absolute */
+    bottom: 0;
+    width: 100%;
+    background: var(--dark-bg);
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------ */
+
+/* 1. Esconder Modais e Telas Cheias por padrão */
+.modal-alert, .modal, .tela-cheia {
+    display: none; /* Eles somem da tela inicial */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fundo escuro transparente */
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. Estilo do Card de Sucesso (para não ficar esticado) */
+.alert-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+}
+
+/* 3. Estilo do Modal de Detalhes (Estilo iFood) */
+.modal-content {
+    background: white;
+    width: 100%;
+    height: 100%; /* Ocupa a tela toda no mobile */
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------ */
+
+
+/* Container do Cardápio */
+#categories-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+/* Linha da Categoria (Acordeão) */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.category-header:hover {
+    background-color: #f9f9f9;
+}
+
+.category-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #333;
+    margin: 0;
+}
+
+.category-header span {
+    color: #999;
+    font-size: 20px;
+}
+
+/* Área onde os produtos vão aparecer ao expandir */
+.category-content {
+    display: none; /* Escondido por padrão */
+    background: #fff;
+}
+
+.category-content.active {
+    display: block;
+}
