@@ -44,7 +44,7 @@ main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.178);
     position: relative;
 }
 
@@ -73,20 +73,60 @@ main {
     margin: 0 auto;
 }
 
-/* Caixa de Busca e Repetir */
+
+/* Título Cardápio */
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+    margin: 10px 0 5px 5px;
+}
+
+/* Ajuste nos cards para garantir que sejam retângulos brancos soltos */
+.repeat-box, .search-box, .category-header, .time-card {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px; /* Espaço entre os retângulos */
+}
+
+/* Estilo específico para os cartões de tempo no final */
+.info-time-container {
+    margin-top: 20px;
+    padding-bottom: 100px; /* Espaço para não sumir atrás do footer */
+}
+
+.time-card {
+    justify-content: flex-start; /* Alinha ícone e texto à esquerda */
+    gap: 15px;
+    background-color: #fff;
+}
+
+.time-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.time-card strong {
+    color: #000;
+}
+
+/* Deixa o input de busca limpo dentro do retângulo */
 .search-box {
-    margin-bottom: 20px;
+    padding: 5px 15px; /* Menos padding vertical para o input */
 }
 
 #search-input {
-    width: 100%;
-    padding: 12px 15px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px; /* Cantos arredondados */
-    font-size: 14px;
-    outline: none;
-    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 10px 0;
+    box-shadow: none;
 }
 
 #search-input:focus {
@@ -115,8 +155,6 @@ main {
     cursor: pointer;
 }
 
-
-
 #menu-btn {
     background: transparent;
     color: white;
@@ -140,8 +178,8 @@ main {
 .menu-text {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
+    font-weight: 00;
+    text-transform: none;
 }
 
 #menu-btn:hover {
@@ -255,31 +293,27 @@ main {
 .cart-badge {
     background-color: #fff;
     color: #000;
-    width: 24px;
+    
+    /* 1. Removemos a largura fixa para ele poder esticar se tiver 2 dígitos */
+    min-width: 24px; 
     height: 24px;
-    border-radius: 50%;
+    
+    /* 2. O PULO DO GATO: Border-radius menor para não ser um círculo */
+    /* 6px ou 8px deixa ele exatamente com as quinas arredondadas da foto */
+    border-radius: 6px; 
+    
+    /* 3. Espaço interno nas laterais para o número respirar */
+    padding: 0 12px; 
+    
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     font-size: 14px;
-    margin-right: 10px;
+    margin-right: 12px;
+    box-sizing: border-box;
 }
 
-/* Estilo do círculo com a quantidade de itens (Badge) */
-.cart-badge {
-    background-color: #fff;
-    color: #000;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;      /* Círculo perfeito */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    margin-right: 10px;
-}
 
 .cart-info {
     display: flex;
@@ -378,4 +412,16 @@ main {
 
 .category-content.active {
     display: block;
+}
+
+
+
+#cart-footer .cart-info span {
+    font-weight: 300; /* mais fino */
+    font-size: 14px;
+}
+
+#cart-footer .cart-total {
+    font-weight: 300; /* mais fino */
+    font-size: 14px;
 }
