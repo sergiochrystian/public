@@ -6,27 +6,13 @@
 }
 
 /* O Fundo cinza de fora */
-/* body {
-    /* Substitua pelo caminho da sua imagem de fundo 
-    background-image: url('../assets/background_pattern.jpg');
-    background-size: cover;
-    /* backdrop-filter: blur(5px); 
-    background-attachment: fixed;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    font-family: 'Roboto', sans-serif;
-} */
-
 body {
     /* 1. O caminho da imagem que você definiu */
     background-image: url('../assets/background_pattern.jpg'); 
     
     /* 2. O PULO DO GATO: Mude de 'cover' para um tamanho fixo (ex: 200px) */
     /* Isso define o tamanho de cada "quadradinho" da sua estampa */
-    background-size: 200px; 
+    background-size: 400px; 
 
     /* 3. Ativa a repetição nos dois sentidos */
     background-repeat: repeat; 
@@ -44,18 +30,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.container {
-    width: 100%;
-    /* Aumentamos aqui para ficar mais largo, como você pediu */
-    max-width: 650px; 
-    background-color: #ffffff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    /* Sombra mais elegante e espalhada */
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); 
-    position: relative;
+
+main {
+    padding-bottom: 80px; /* Cria um espaço para o conteúdo não ficar escondido atrás do footer */
 }
+
 
 /* A Folha Branca (App) */
 .container-principal {
@@ -138,6 +117,40 @@ body {
 
 
 
+#menu-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone e a palavra MENU */
+    font-size: 24px; /* Tamanho do ícone */
+    transition: all 0.3s ease;
+}
+
+#menu-btn:hover {
+    background: white;       /* Inverte as cores ao passar o mouse */
+    color: black;
+}
+
+/* Estilizando apenas o texto MENU dentro do botão */
+.menu-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#menu-btn:hover {
+    background: white;
+    color: black;
+}
+
+
+
 /* O Card do Produto (Foto 4) */
 .product-card {
     background: white;
@@ -216,17 +229,68 @@ body {
 
 
 /* FOOTER - Ajuste do Carrinho para não fugir da folha branca */
+
+/* FOOTER - Fixado no rodapé da tela, centralizado com o app */
 #cart-footer {
-    position: absolute; /* Mude de fixed para absolute */
-    bottom: 0;
-    width: 100%;
-    background: var(--dark-bg);
-    color: white;
-    padding: 5px 10px;
+    position: fixed;        
+    bottom: 0;              
+    left: 50%;              
+    transform: translateX(-50%); 
+    
+    width: 100%;            
+    max-width: 900px;       /* DEVE ser igual ao max-width da sua .container */
+    
+    background-color: #000;
+    color: #fff;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    border-top: 3px solid #fff; 
+    z-index: 1000;          
+}
+
+/* Garante que o badge (círculo) apareça corretamente */
+.cart-badge {
+    background-color: #fff;
+    color: #000;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/* Estilo do círculo com a quantidade de itens (Badge) */
+.cart-badge {
+    background-color: #fff;
+    color: #000;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;      /* Círculo perfeito */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.cart-info {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.cart-total {
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
 
