@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery App</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- Link abaixo usado para adicionar o ícone atrás do nome cardápio -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <script type="module">
@@ -25,110 +26,16 @@
                 Menu <span class="menu-text">Menu</span>
             </button>
         </header>
-    
-        <main>
-            <h2 class="section-title">Cardápio</h2>
 
-            <section class="repeat-box">
-                <p>Quer repetir um pedido?</p>
-                <button class="btn-repeat">
-                    <span class="material-symbols-outlined">refresh</span> Repetir
-                </button>
-            </section>
-
-            <section class="search-box">
-                <input type="text" id="search-input" placeholder="Digite para buscar no cardápio...">
-            </section>
-
-            <div id="categories-container">
-                </div>
-
-            <section class="info-time-container">
-                <div class="time-card">
-                    <span class="material-symbols-outlined">shopping_bag</span>
-                    <p>Tempo para retirada: <strong>20 à 40 minutos</strong></p>
-                </div>
-                <div class="time-card">
-                    <span class="material-symbols-outlined">delivery_dining</span>
-                    <p>Tempo para entrega: <strong>40 à 100 minutos</strong></p>
-                </div>
-            </section>
-        </main>
-    
-        <!-- Modal de Sucesso -->
-        <div id="modal-sucesso" class="modal-alert">
-            <div class="alert-content">
-                <div class="icon-circle">
-                    <span class="material-symbols-outlined">check</span>
-                </div>
-                <h2>Sucesso</h2>
-                <p>Adicionado com sucesso ao carrinho!</p>
-                <button onclick="fecharSucesso()" class="btn-ok">OK</button>
-            </div>
-        </div>
-    
-        <!-- Modal de Detalhes do Produto -->
-        <div id="modal-detalhes" class="modal">
-            <div class="modal-content">
-                <header class="modal-header">
-                    <button onclick="fecharModal()" class="btn-back">
-                        <span class="material-symbols-outlined">arrow_back_ios</span>
-                    </button>
-                    <h3>Detalhes</h3>
-                </header>
-    
-                <img src="" id="modal-img" alt="Produto">
-    
-                <div class="modal-body">
-                    <h2 id="modal-titulo"></h2>
-                    <p id="modal-descricao"></p>
-    
-                    <div class="modal-footer-acao">
-                        <div class="qtd-control">
-                            <button onclick="alterarQtd(-1)">-</button>
-                            <input type="number" id="qtd-input" value="1" readonly>
-                            <button onclick="alterarQtd(1)">+</button>
-                        </div>
-                        <button id="btn-adicionar-carrinho" class="btn-buy">
-                            Adicionar <span id="modal-preco"></span>
-                        </button>
-                    </div>
+        <div id="webapp-cardapio">
+            <div class="titulo-cardapio">
+                <div class="titulo-cardapio-text">
+                    <i class="fa fa-columns icone-cardapio"></i>
+                    <span>CARDÁPIO</span>
                 </div>
             </div>
         </div>
-    
-        <div id="modal-erro" class="modal-alert">
-            <div class="alert-content">
-                <div class="icon-circle error">
-                    <span class="material-symbols-outlined">close</span>
-                </div>
-                <h2>Erro</h2>
-                <p>Que pena, estamos fechados agora. Confira nosso horário de funcionamento!</p>
-                <button onclick="fecharErro()" class="btn-error">OK</button>
-            </div>
-        </div>
-    
-        <section id="tela-carrinho" class="tela-cheia" style="display: none;">
-            <header class="modal-header">
-                <button onclick="fecharCarrinho()" class="btn-back">
-                    <span class="material-symbols-outlined">arrow_back_ios</span>
-                </button>
-                <h3>Meu Carrinho</h3>
-            </header>
-    
-            <div class="carrinho-itens" id="lista-itens-carrinho">
-                </div>
-    
-            <div class="carrinho-resumo">
-                <div class="resumo-linha">
-                    <span>Subtotal</span>
-                    <span id="resumo-subtotal">R$ 0,00</span>
-                </div>
-                <button class="btn-finalizar" onclick="finalizarPedido()">FECHAR PEDIDO</button>
-                <button class="btn-limpar" onclick="limparCarrinho()">Limpar Carrinho</button>
-            </div>
-        </section>
-
+        
     
         <footer id="cart-footer">
             <div class="cart-info">

@@ -30,23 +30,76 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-
-main {
-    padding-bottom: 80px; /* Cria um espaço para o conteúdo não ficar escondido atrás do footer */
-}
-
-
 /* A Folha Branca (App) */
 .container-principal {
     width: 100%;
     max-width: 900px;    /* Largura fixa de um celular */
-    background-color: #ffffff;
+    background-color: #EEF1F5;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.178);
     position: relative;
 }
+
+/* Sua div pai que você já tem */
+#webapp-cardapio {
+    width: 100%;
+    max-width: 820px; 
+    margin: 20px auto 0 auto;
+    padding: 20px;
+    background-color: #ffffff; 
+    min-height: 70vh;
+}
+
+main {
+    padding-bottom: 80px; /* Cria um espaço para o conteúdo não ficar escondido atrás do footer */
+}
+
+/* Container para colocar o nome e o botão lado a lado */
+.cardapio-topo-flex {
+    display: flex;
+    justify-content: space-between; /* Nome na esquerda, Botão na direita */
+    align-items: center;           /* Alinha eles na mesma altura */
+    padding: 0 15px;               /* Afasta um pouco das bordas do fundo */
+    margin: 15px 0;
+}
+
+/* O Botão exatamente como te entreguei primeiro, mas agora com fundo preto */
+#menu-btn {
+    background: #000;              /* Fundo preto */
+    color: white;                  /* Texto e ícone brancos */
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;               /* Tamanho do ícone de barras */
+    transition: all 0.3s ease;
+}
+
+#menu-btn:hover {
+    background: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.menu-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Ajuste no título para não criar espaços desnecessários */
+.section-title {
+    margin: 0 !important;
+    font-size: 24px;
+    color: #333;
+}
+
 
 /* Ajuste do Header para não sobrar espaço */
 #store-header {
@@ -155,24 +208,6 @@ main {
     cursor: pointer;
 }
 
-#menu-btn {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    border-radius: 8px;
-    padding: 5px 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Espaço entre o ícone e a palavra MENU */
-    font-size: 24px; /* Tamanho do ícone */
-    transition: all 0.3s ease;
-}
-
-#menu-btn:hover {
-    background: white;       /* Inverte as cores ao passar o mouse */
-    color: black;
-}
 
 /* Estilizando apenas o texto MENU dentro do botão */
 .menu-text {
@@ -181,13 +216,6 @@ main {
     font-weight: 00;
     text-transform: none;
 }
-
-#menu-btn:hover {
-    background: white;
-    color: black;
-}
-
-
 
 /* O Card do Produto (Foto 4) */
 .product-card {
