@@ -1,0 +1,196 @@
+/* --- BOTTOM NAVBAR --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 900px;
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 5000;
+    border-top: 1px solid #333;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 9px;
+    gap: 5px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+}
+
+.nav-item.active {
+    opacity: 1;
+}
+
+.nav-item i {
+    font-size: 18px;
+}
+
+.nav-label {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* --- HOME SCREEN --- */
+#webapp-home {
+    width: 100%;
+    min-height: calc(100vh - 60px); 
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/background-home.jpg'); 
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+}
+
+#webapp-home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay preto clarinho */
+    z-index: 1;
+}
+
+.home-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+}
+
+.home-logo-badge {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+}
+
+.home-contacts {
+    margin-bottom: 25px;
+}
+
+.home-contacts p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.home-contacts i {
+    font-size: 16px;
+}
+
+.fa-whatsapp { color: #25D366; }
+.fa-phone { color: #fff; }
+
+.home-opening-hours {
+    margin-bottom: 35px;
+}
+
+.home-opening-hours .label {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.home-opening-hours .hours {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #eee;
+    letter-spacing: 0.5px;
+}
+
+.btn-install-android {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-install-android:hover {
+    background-color: #222;
+}
+
+.btn-install-android i {
+    font-size: 32px;
+    color: #A4C639;
+}
+
+.btn-install-android .btn-text {
+    text-align: left;
+}
+
+.btn-install-android .btn-text span {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #aaa;
+}
+
+.btn-install-android .btn-text strong {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Ajustes de Visibilidade */
+#webapp-cardapio {
+    display: none;
+}
+
+body.home-active #webapp-cardapio,
+body.home-active #cart-footer {
+    display: none !important;
+}
+
+body.home-active #webapp-home {
+    display: flex;
+}
+
+body.cardapio-active #webapp-home {
+    display: none !important;
+}
+
+body.cardapio-active #webapp-cardapio {
+    display: block !important;
+}
+
+body.cardapio-active #cart-footer {
+    display: flex !important;
+    bottom: 50px;
+}

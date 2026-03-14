@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery App</title>
+    <title>Kaká Lanches</title>
+    <link rel="icon" href="assets/logo-kaka-lanches.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Link abaixo usado para adicionar o ícone atrás do nome cardápio -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<script type="module">
-    import { carregarCardapio } from './js/api.js';
-    carregarCardapio(); // Isso faz os lanches aparecerem na tela!
-</script>
-
-<body>
+<body class="home-active">
     <div class="container-principal">
         <header id="store-header">
             <div class="logo-container">
@@ -27,6 +26,31 @@
             </button>
         </header>
 
+        <!-- TELA HOME -->
+        <div id="webapp-home">
+            <div class="home-content">
+                <img src="assets/logo-kaka-lanches.png" alt="Logo Badge" class="home-logo-badge">
+
+                <div class="home-contacts">
+                    <p><i class="fa fa-whatsapp"></i> 99 99138-8338</p>
+                    <p><i class="fa fa-phone"></i> 99 99138-8338</p>
+                </div>
+
+                <div class="home-opening-hours">
+                    <span class="label">Funcionamento</span>
+                    <span class="hours">SÁBADOS e DOMINGOS das 10:40 até as 15:00</span>
+                </div>
+
+                <a href="#" class="btn-install-android">
+                    <i class="fa fa-android"></i>
+                    <div class="btn-text">
+                        <span>INSTALAR APP</span>
+                        <strong>android</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <div id="webapp-cardapio">
             <div class="titulo-cardapio">
                 <div class="titulo-cardapio-text">
@@ -34,9 +58,36 @@
                     <span>CARDÁPIO</span>
                 </div>
             </div>
+
+            <a href="login.html" class="repeat-link" style="text-decoration: none; color: inherit; display: block;">
+                <div class="repeat-box">
+                    <span class="repeat-text">Quer repetir um pedido?</span>
+                    <button class="btn-repeat">
+                        <i class="fa fa-refresh"></i> Repetir
+                    </button>
+                </div>
+            </a>
+
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Digite para buscar no cardápio ...">
+            </div>
+
+            <!-- O conteúdo abaixo será carregado dinamicamente pelo arquivo js/api.js -->
+            <div id="categories-container">
+                <p style="text-align:center; padding: 20px;">Carregando cardápio...</p>
+            </div>
+
+            <div class="info-time-container">
+                <div class="time-card">
+                    <p>Tempo para retirada 20 à 40 minutos</p>
+                </div>
+                <div class="time-card">
+                    <p>Tempo para entrega 40 à 100 minutos</p>
+                </div>
+            </div>
         </div>
-        
-    
+
+
         <footer id="cart-footer">
             <div class="cart-info">
                 <div class="cart-badge">0</div>
@@ -46,11 +97,181 @@
         </footer>
 
         <script type="module" src="js/api.js"></script>
+        <script type="module" src="js/cart.js"></script>
         <script type="module" src="js/ui.js"></script>
 
-        <script type="module">
-            import { carregarCardapio } from './js/api.js';
-            carregarCardapio();
+
+
+        <div id="menu-overlay" class="menu-overlay"></div>
+        <div id="menu-drawer" class="menu-drawer">
+            <div class="drawer-header">
+                <button id="close-menu" class="material-symbols-outlined close-btn">close</button>
+                <img src="assets/logo-kaka-lanches.png" alt="Logo" class="drawer-logo">
+                <div class="closed-badge">ESTAMOS FECHADOS</div>
+            </div>
+            <ul class="drawer-menu">
+                <li><a href="javascript:void(0)" onclick="switchPage('home'); toggleMenu();"><i class="fa fa-home"></i>
+                        Home</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('cardapio'); toggleMenu();"><i
+                            class="fa fa-columns"></i> Cardápio</a></li>
+                <li><a href="#"><i class="fa fa-shopping-basket"></i> Carrinho</a></li>
+                <li class="section-divider"></li>
+                <li><a href="#"><i class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Localização</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-phone"></i> Ligar</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-star-o"></i> Avaliações</a></li>
+                <li class="section-divider"></li>
+                <li><a href="login.html"><i class="fa fa-square-o"></i> Meus pedidos</a></li>
+                <li class="divider"></li>
+                <li><a href="login.html"><i class="fa fa-user-circle-o"></i> Minha conta</a></li>
+                <li class="divider"></li>
+            </ul>
+
+            <div class="drawer-info">
+                <h4>Endereço</h4>
+                <p>AV. Getúlio Vargas, 3518, Bacanga - Imperatriz/MA</p>
+
+                <h4>Funcionamento</h4>
+                <p>SÁBADOS e DOMINGOS das 10:40 até as 15:00</p>
+
+                <h4>Formas de pagamento</h4>
+                <p class="payment-note">* A disponibilidade das formas de pagamento pode mudar de acordo com o tipo do
+                    pedido (entrega, retirada, etc).</p>
+                <ul class="payment-list">
+                    <li>Dinheiro</li>
+                    <li>Pix</li>
+                    <li>Cartão de débito</li>
+                    <li>Cartão de crédito</li>
+                </ul>
+            </div>
+
+            <div class="drawer-footer">
+                <div class="deeliv-logo-text">
+                    TECNOLOGIA
+                    <span>deeliv</span>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Menu Toggle Logic (Definido externamente ao module para garantir execução imediata)
+            (function () {
+                const menuBtn = document.getElementById('menu-btn');
+                const closeMenuBtn = document.getElementById('close-menu');
+                const menuDrawer = document.getElementById('menu-drawer');
+                const menuOverlay = document.getElementById('menu-overlay');
+                const statusBadge = document.querySelector('.closed-badge');
+
+                // Lógica de horário embutida para evitar erros se o import falhar
+                const horaAtual = new Date().getHours();
+                const aberto = horaAtual >= 10 && horaAtual < 22;
+
+                if (statusBadge) {
+                    if (aberto) {
+                        statusBadge.innerText = 'ESTAMOS ABERTOS';
+                        statusBadge.style.color = '#28a745';
+                        statusBadge.style.borderColor = '#28a745';
+                    } else {
+                        statusBadge.innerText = 'ESTAMOS FECHADOS';
+                        statusBadge.style.color = '#dc3545';
+                        statusBadge.style.borderColor = '#dc3545';
+                    }
+                }
+
+                window.toggleMenu = function () {
+                    console.log("Toggle Menu acionado");
+                    const isActive = menuDrawer.classList.toggle('active');
+                    menuOverlay.style.display = isActive ? 'block' : 'none';
+
+                    if (isActive) {
+                        const scrollY = window.scrollY;
+                        document.body.style.position = 'fixed';
+                        document.body.style.top = `-${scrollY}px`;
+                        document.body.style.width = '100%';
+                        document.body.classList.add('menu-open');
+                    } else {
+                        const scrollY = document.body.style.top;
+                        document.body.style.position = '';
+                        document.body.style.top = '';
+                        document.body.style.width = '';
+                        document.body.classList.remove('menu-open');
+                        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                    }
+                }
+
+                if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+                if (menuOverlay) {
+                    menuOverlay.addEventListener('click', toggleMenu);
+                    menuOverlay.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+                }
+            })();
+        </script>
+        <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchPage('home')">
+                <i class="fa fa-home"></i>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-item" onclick="switchPage('cardapio')">
+                <i class="fa fa-columns"></i>
+                <span class="nav-label">Ver Cardápio</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='login.html'">
+                <i class="fa fa-file-text-o"></i>
+                <span class="nav-label">Meus Pedidos</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='login.html'">
+                <i class="fa fa-user-circle-o"></i>
+                <span class="nav-label">Minha Conta</span>
+            </button>
+        </nav>
+
+        <script>
+            // Função para alternar entre as telas
+            window.switchPage = function (page) {
+                const body = document.body;
+                const items = document.querySelectorAll('.nav-item');
+
+                // Remove active de todos
+                items.forEach(item => item.classList.remove('active'));
+
+                if (page === 'home') {
+                    body.classList.add('home-active');
+                    body.classList.remove('cardapio-active');
+                    items[0].classList.add('active');
+                    document.title = "Kaká Lanches";
+                    window.scrollTo(0, 0);
+                } else if (page === 'cardapio') {
+                    body.classList.remove('home-active');
+                    body.classList.add('cardapio-active');
+                    items[1].classList.add('active');
+                    document.title = "Cardápio | Kaká Delivery";
+                    window.scrollTo(0, 0);
+                }
+            };
+        </script>
+        <!-- Modal de Sucesso (Adicionado ao Carrinho) -->
+        <div id="success-modal" class="modal-overlay">
+            <div class="modal-success-card">
+                <div class="success-icon-circle">
+                    <span class="material-symbols-outlined" style="font-size: 50px;">check</span>
+                </div>
+                <h2>Sucesso</h2>
+                <p>Adicionado com sucesso ao carrinho!</p>
+                <button class="btn-modal-ok" onclick="closeSuccessModal()">OK</button>
+            </div>
+        </div>
+
+        <script>
+            window.closeSuccessModal = function () {
+                document.getElementById('success-modal').style.display = 'none';
+            }
         </script>
     </div>
 </body>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Kaká Delivery</title>
+    <link rel="icon" href="assets/logo-kaka-lanches.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container-principal">
+        <header id="store-header">
+            <div class="logo-container" id="header-logo-container">
+                <a href="index.html">
+                    <img src="assets/logo-kaka-lanches.png" id="store-logo" alt="Logo Loja">
+                </a>
+            </div>
+            <div class="header-title-container" id="header-title-container"
+                style="display: none; flex-grow: 1; align-items: center;">
+                <a href="index.html"
+                    style="color: #fff; text-decoration: none; margin-right: 15px; font-size: 24px; display: flex; align-items: center;"><i
+                        class="fa fa-angle-left"></i></a>
+                <span style="color: #fff; font-size: 16px; font-weight: bold;">MEUS PEDIDOS</span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button id="btn-sair-header"
+                    style="display: none; background: transparent; border: 1px solid #dc3545; color: #dc3545; padding: 4px 10px; border-radius: 4px; font-size: 13px; cursor: pointer;">Sair</button>
+                <button id="menu-btn" class="material-symbols-outlined">
+                    Menu <span class="menu-text">Menu</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="webapp-login">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <i class="fa fa-lock"></i> LOGIN
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <p>Informe seu telefone para fazer login na sua conta:</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Telefone <span>*</span></label>
+                            <div class="input-group">
+                                <span class="country-code">
+                                    <img src="https://flagcdn.com/w20/br.png" width="20" alt="BR"
+                                        style="margin-right: 4px;"> +55 <i class="fa fa-caret-down"
+                                        style="margin-left: 2px;"></i>
+                                </span>
+                                <input type="tel" id="telefone-input" class="form-control" placeholder="__ _____-____"
+                                    autocomplete="off" inputmode="numeric">
+                            </div>
+                            <span id="telefone-error" class="help-block"
+                                style="display: none; color: #e73d4a; font-size: 13px; margin-top: 5px;">Este telefone
+                                não é válido.</span>
+                        </div>
+
+                        <button class="btn-login" id="btn-login">
+                            Fazer login <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="recaptcha-container"></div>
+        </div>
+
+        <!-- TELA DE MEUS PEDIDOS (Dinamizada pelo auth.js) -->
+        <div id="webapp-orders">
+            <p class="notification-banner">Gostaria de ser notificado quando seu pedido mudar de status?</p>
+            <button class="btn-tutorial"><i class="fa fa-play-circle"></i> Ver passo a passo</button>
+
+            <!-- LISTA DE PEDIDOS -->
+            <div id="order-list-section">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <i class="fa fa-square-o"></i> MEUS PEDIDOS
+                    </div>
+                    <div class="portlet-body">
+                        <p class="orders-intro-text">
+                            Listagem dos últimos pedidos realizados conosco, você pode acompanhar o andamento do pedido
+                            assim como ver mais detalhes através dos botões abaixo. O pedido poderá ser refeito conforme
+                            a disponibilidade dos itens.
+                        </p>
+                        <div class="orders-grid" id="orders-container">
+                            <!-- Pedidos serão inseridos aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETALHES / ANDAMENTO DO PEDIDO -->
+            <div id="order-tracking-section" style="display: none;">
+                <div class="portlet light">
+                    <div class="portlet-title" id="tracking-title">
+                        <i class="fa fa-columns"></i> ANDAMENTO
+                    </div>
+                    <div class="portlet-body">
+                        <div class="tracking-id-banner" id="tracking-order-id">#PEDIDO S4SF7IXI</div>
+
+                        <p class="orders-intro-text" style="text-align: center; margin-bottom: 30px;">
+                            Acompanhe o andamento do seu pedido junto com o nosso estabelecimento.
+                        </p>
+
+                        <div class="timeline" id="tracking-timeline">
+                            <!-- Timeline será inserida aqui -->
+                        </div>
+
+                        <div class="tracking-footer-btns">
+                            <button class="btn-tracking" id="btn-avaliar-track"><i class="fa fa-star-o"></i> Avaliar
+                                pedido</button>
+                            <button class="btn-tracking" id="btn-detalhes-track"><i class="fa fa-search"></i> Detalhes
+                                do pedido</button>
+                            <button class="btn-tracking" id="btn-todos-track"><i class="fa fa-square-o"></i> Todos os
+                                pedidos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="cart-footer">
+            <div class="cart-info">
+                <div class="cart-badge">0</div>
+                <span>VER CARRINHO</span>
+            </div>
+            <div class="cart-total">R$ 0,00</div>
+        </footer>
+
+        <!-- Modal de Erro de Validação -->
+        <div id="modal-validacao" class="modal-alert" style="display: none;">
+            <div class="alert-content">
+                <div class="icon-circle error"
+                    style="width: 80px; height: 80px; border: 2px solid #f27474; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <span style="color: #f27474; font-size: 50px; font-weight: 300;">&times;</span>
+                </div>
+                <h2 style="font-size: 26px; color: #595959; margin-bottom: 15px; font-weight: 400;">Erro</h2>
+                <p style="color: #545454; font-size: 16px; margin-bottom: 25px; line-height: 1.4;">Ocorreram erros
+                    durante a validação do formulário, verifique os campos.</p>
+                <button onclick="document.getElementById('modal-validacao').style.display='none'"
+                    style="background: #f27474; color: white; border: none; padding: 10px 25px; border-radius: 4px; font-size: 17px; cursor: pointer;">OK</button>
+            </div>
+        </div>
+
+        <!-- Menu Overlay and Drawer -->
+        <div id="menu-overlay" class="menu-overlay"></div>
+        <div id="menu-drawer" class="menu-drawer">
+            <div class="drawer-header">
+                <button id="close-menu" class="material-symbols-outlined close-btn">close</button>
+                <img src="assets/logo-kaka-lanches.png" alt="Logo" class="drawer-logo">
+                <div class="closed-badge">ESTAMOS FECHADOS</div>
+            </div>
+            <ul class="drawer-menu">
+                <li><a href="index.html" onclick="toggleMenu();"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="index.html" onclick="toggleMenu();"><i class="fa fa-columns"></i> Cardápio</a></li>
+                <li><a href="index.html"><i class="fa fa-shopping-basket"></i> Carrinho</a></li>
+                <li class="section-divider"></li>
+                <li><a href="#"><i class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Localização</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-phone"></i> Ligar</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-star-o"></i> Avaliações</a></li>
+                <li class="section-divider"></li>
+                <li><a href="login.html"><i class="fa fa-square-o"></i> Meus pedidos</a></li>
+                <li class="divider"></li>
+                <li><a href="login.html"><i class="fa fa-user-circle-o"></i> Minha conta</a></li>
+                <li class="divider"></li>
+            </ul>
+
+            <div class="drawer-info">
+                <h4>Endereço</h4>
+                <p>AV. Getúlio Vargas, 3518, Bacanga - Imperatriz/MA</p>
+
+                <h4>Funcionamento</h4>
+                <p>SÁBADOS e DOMINGOS das 10:40 até as 15:00</p>
+
+                <h4>Formas de pagamento</h4>
+                <p class="payment-note">* A disponibilidade das formas de pagamento pode mudar de acordo com o tipo do
+                    pedido (entrega, retirada, etc).</p>
+                <ul class="payment-list">
+                    <li>Dinheiro</li>
+                    <li>Pix</li>
+                    <li>Cartão de débito</li>
+                    <li>Cartão de crédito</li>
+                </ul>
+            </div>
+
+            <div class="drawer-footer">
+                <div class="deeliv-logo-text">
+                    TECNOLOGIA
+                    <span>deeliv</span>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Menu Toggle Logic
+            (function () {
+                const menuBtn = document.getElementById('menu-btn');
+                const closeMenuBtn = document.getElementById('close-menu');
+                const menuDrawer = document.getElementById('menu-drawer');
+                const menuOverlay = document.getElementById('menu-overlay');
+                const statusBadge = document.querySelector('.closed-badge');
+
+                const horaAtual = new Date().getHours();
+                const aberto = horaAtual >= 10 && horaAtual < 22;
+
+                if (statusBadge) {
+                    if (aberto) {
+                        statusBadge.innerText = 'ESTAMOS ABERTOS';
+                        statusBadge.style.color = '#28a745';
+                        statusBadge.style.borderColor = '#28a745';
+                    } else {
+                        statusBadge.innerText = 'ESTAMOS FECHADOS';
+                        statusBadge.style.color = '#dc3545';
+                        statusBadge.style.borderColor = '#dc3545';
+                    }
+                }
+
+                window.toggleMenu = function () {
+                    console.log("Toggle Menu acionado");
+                    const isActive = menuDrawer.classList.toggle('active');
+                    menuOverlay.style.display = isActive ? 'block' : 'none';
+
+                    if (isActive) {
+                        const scrollY = window.scrollY;
+                        document.body.style.position = 'fixed';
+                        document.body.style.top = `-${scrollY}px`;
+                        document.body.style.width = '100%';
+                        document.body.classList.add('menu-open');
+                    } else {
+                        const scrollY = document.body.style.top;
+                        document.body.style.position = '';
+                        document.body.style.top = '';
+                        document.body.style.width = '';
+                        document.body.classList.remove('menu-open');
+                        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                    }
+                }
+
+                if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+                if (menuOverlay) {
+                    menuOverlay.addEventListener('click', toggleMenu);
+                    menuOverlay.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+                }
+            })();
+        </script>
+
+        <script>
+            // Script de Máscara (Tradicional para garantir que funcione)
+            (function () {
+                const input = document.getElementById('telefone-input');
+                if (!input) return;
+
+                input.addEventListener('keydown', function (e) {
+                    const permitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
+                    if (!permitidas.includes(e.key) && !e.ctrlKey && !e.metaKey && !/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                input.addEventListener('input', function (e) {
+                    let v = e.target.value.replace(/\D/g, '');
+                    let res = "";
+                    if (v.length > 0) {
+                        res = v.substring(0, 2);
+                        if (v.length > 2) res += " " + v.substring(2, 7);
+                        if (v.length > 7) res += "-" + v.substring(7, 11);
+                    }
+                    e.target.value = res;
+                });
+            })();
+        </script>
+
+        <script type="module" src="js/ui.js"></script>
+        <script type="module">
+            import { fazerLogin, fazerLogout } from './js/auth.js';
+            document.getElementById('btn-login').addEventListener('click', fazerLogin);
+
+            const btnSairHeader = document.getElementById('btn-sair-header');
+            if (btnSairHeader) {
+                btnSairHeader.addEventListener('click', fazerLogout);
+            }
+        </script>
+    </div>
+</body>
+
+</html>

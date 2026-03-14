@@ -1,8 +1,11 @@
-// Simulação de configuração da loja vinda do Firebase
+import { db } from './firebase-init.js';
+import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Configuração da loja (será buscada do banco futuramente)
 const configLoja = {
     nome: "Feijoão Delivery",
-    horarioAbertura: 10, // 10:00h
-    horarioFechamento: 22 // 22:00h
+    horarioAbertura: 10,
+    horarioFechamento: 22
 };
 
 export function estaAberto() {
@@ -11,93 +14,122 @@ export function estaAberto() {
 }
 
 
-// js/api.js
+// Cache global para facilitar o acesso aos produtos pelo ID nos cliques
+window.produtosCache = {};
 
-// 1. Simulando dados que viriam do Firebase
-const produtosMock = [
-    {
-        id: 1,
-        nome: "Feijoada Baby Completa",
-        descricao: "Arroz, farofa, pururuca, couve e laranja.",
-        preco: 25.00,
-        imagem: "https://cdn.pixabay.com/photo/2014/06/11/17/00/food-366875_1280.jpg",
-        categoria: "Feijoada"
-    },
-    {
-        id: 2,
-        nome: "Coca-Cola 350ml",
-        descricao: "Lata gelada",
-        preco: 6.00,
-        imagem: "https://cdn.pixabay.com/photo/2014/09/26/19/51/coca-cola-462776_1280.jpg",
-        categoria: "Bebidas"
-    }
-];
-
-// 2. Função para carregar os produtos na tela
-export function carregarCardapio() {
+// 1. Função para carregar os produtos na tela
+export async function carregarCardapio() {
     const container = document.getElementById('categories-container');
-    
-    // Criando o HTML dinamicamente
-    let html = '<h2>Destaques</h2>';
-    
-    produtosMock.forEach(produto => {
-        html += `
-            <div class="product-card" onclick="prepararModal(${produto.id})">
-                <div class="product-content">
-                    <img src="${produto.imagem}" alt="${produto.nome}">
-                    <div class="info">
-                        <h4>${produto.nome}</h4>
-                        <p>${produto.descricao}</p>
-                        <span class="preco">R$ ${produto.preco.toFixed(2)}</span>
-                    </div>
+    if (!container) return;
+
+    // Limpa o container IMEDIATAMENTE para remover as "marcas" estáticas do HTML
+    // Isso garante que o usuário só veja o que vem do Banco de Dados
+    container.innerHTML = '<p style="text-align:center; padding: 20px;">Carregando cardápio...</p>';
+
+    try {
+        // Buscamos sem orderBy para evitar erros de índice no Firebase iniciante
+        const q = query(collection(db, "produtos"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+            console.log("Nenhum produto encontrado no banco.");
+            container.innerHTML = '<p style="text-align:center; padding: 20px;">Nenhum produto encontrado. Use a página de configuração.</p>';
+            return;
+        }
+
+        // Agrupar produtos por categoria e alimentar o cache
+        const categorias = {};
+        querySnapshot.forEach((doc) => {
+            const produto = { id: doc.id, ...doc.data() };
+            window.produtosCache[doc.id] = produto; // Salva no cache
+
+            if (!categorias[produto.categoria]) {
+                categorias[produto.categoria] = [];
+            }
+            categorias[produto.categoria].push(produto);
+        });
+
+        // Limpa novamente antes de renderizar os itens reais
+        container.innerHTML = '';
+
+        // Ordenar as categorias para que 'FEIJOADA' venha antes de 'ADICIONAIS'
+        // Usamos reverse para que 'F' venha antes de 'A' na ordem alfabética reversa
+        const categoriasOrdenadas = Object.keys(categorias).sort().reverse();
+
+        for (const nomeCategoria of categoriasOrdenadas) {
+            // Ordena os produtos de forma inteligente para manter a lógica original do cardápio
+            const produtos = categorias[nomeCategoria].sort((a, b) => {
+                // Se for a categoria principal de Feijoada, ordem de preço crescente (Baby primeiro)
+                if (nomeCategoria === 'FEIJOADA') {
+                    return a.preco - b.preco;
+                }
+
+                // Para Adicionais, criamos grupos lógicos de prioridade
+                const getPrioridade = (nome) => {
+                    if (nome.includes("Adicional de Feijoada")) return 1;
+                    if (nome.includes("Arroz")) return 2;
+                    if (nome.includes("Pururuca")) return 3;
+                    return 4; // Itens como Farofa, Couve e Laranja (os últimos)
+                };
+
+                const pA = getPrioridade(a.nome);
+                const pB = getPrioridade(b.nome);
+
+                if (pA !== pB) return pA - pB; // Ordena pelos grupos
+                return a.preco - b.preco;     // Se for do mesmo grupo, ordena pelo preço
+            });
+
+            const section = document.createElement('div');
+            section.className = 'category-section';
+
+            section.innerHTML = `
+                <div class="category-header" onclick="toggleCategoria(this)">
+                    <h3>${nomeCategoria.toUpperCase()}</h3>
+                    <span style="font-size: 20px; color: #999; font-weight: 300;">+</span>
                 </div>
-                <button class="btn-comprar">+ COMPRAR</button>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
+                <div class="category-content">
+                    ${produtos.map(p => `
+                        <div class="product-card">
+                            <div class="product-content ${!p.imagem ? 'adicional-product-content' : ''}">
+                                ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}">` : ''}
+                                <div class="info">
+                                    <h4>${p.nome}</h4>
+                                    ${p.descricao ? `<p>${p.descricao}</p>` : ''}
+                                    <span class="preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
+                                </div>
+                            </div>
+                            <button class="btn-comprar" onclick="adicionarAoCarrinho('${p.id}')">+ COMPRAR</button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.appendChild(section);
+        }
+    } catch (error) {
+        console.error("Erro ao carregar cardápio:", error);
+    }
 }
 
-// Inicializa quando o arquivo carregar
-carregarCardapio();
-
-// js/api.js
-
-export function carregarCardapio() {
-    const container = document.getElementById('categories-container');
-    const categorias = ["FEIJOADA", "COMBO DE FEIJOADA", "ADICIONAIS", "BEBIDAS"];
-    
-    container.innerHTML = ""; // Limpa o container
-
-    categorias.forEach(cat => {
-        const catSection = document.createElement('div');
-        catSection.className = 'category-section';
-        
-        catSection.innerHTML = `
-            <div class="category-header" onclick="toggleCategoria(this)">
-                <h3>${cat}</h3>
-                <span class="material-symbols-outlined">add</span>
-            </div>
-            <div class="category-content">
-                <p style="padding: 20px; color: #666;">Nenhum item disponível ainda.</p>
-            </div>
-        `;
-        
-        container.appendChild(catSection);
-    });
+// 2. Inicializa quando o arquivo carregar (caso seja importado)
+// Apenas se não houver já uma chamada no HTML
+if (document.getElementById('categories-container')) {
+    carregarCardapio();
 }
 
-// Função para abrir/fechar a categoria
-window.toggleCategoria = function(elemento) {
+// 3. Função para abrir/fechar a categoria
+window.toggleCategoria = function (elemento) {
     const conteudo = elemento.nextElementSibling;
     const icone = elemento.querySelector('span');
-    
+
     // Fecha outros que estiverem abertos (opcional)
     document.querySelectorAll('.category-content').forEach(el => {
-        if(el !== conteudo) el.classList.remove('active');
+        if (el !== conteudo) {
+            el.classList.remove('active');
+            let prevIcon = el.previousElementSibling.querySelector('span');
+            if (prevIcon) prevIcon.innerText = '+';
+        }
     });
 
     conteudo.classList.toggle('active');
-    icone.innerText = conteudo.classList.contains('active') ? 'remove' : 'add';
+    icone.innerText = conteudo.classList.contains('active') ? '-' : '+';
 };

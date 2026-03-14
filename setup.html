@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Configuração Inicial do Banco</title>
+    <link rel="icon" href="assets/logo-kaka-lanches.png" type="image/png">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #status {
+            margin-top: 15px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Configuração do Cardápio</h2>
+        <p>Clique no botão abaixo para carregar os produtos no seu Firebase.</p>
+        <button id="btn-seed">CADASTRAR PRODUTOS AGORA</button>
+        <div id="status"></div>
+        <p><a href="index.html">Voltar para o Cardápio</a></p>
+    </div>
+
+    <script type="module">
+        import { semearBanco } from './js/seed.js';
+
+        document.getElementById('btn-seed').onclick = async () => {
+            const btn = document.getElementById('btn-seed');
+            const status = document.getElementById('status');
+
+            btn.disabled = true;
+            status.innerText = "Cadastrando... aguarde.";
+
+            try {
+                await semearBanco();
+                status.innerText = "Concluído! Você já pode fechar esta página.";
+            } catch (error) {
+                status.innerText = "Erro: " + error.message;
+                console.error(error);
+                btn.disabled = false;
+            }
+        };
+    </script>
+</body>
+
+</html>
