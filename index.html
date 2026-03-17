@@ -32,13 +32,13 @@
                 <img src="assets/logo-kaka-lanches.png" alt="Logo Badge" class="home-logo-badge">
 
                 <div class="home-contacts">
-                    <p><i class="fa fa-whatsapp"></i> 99 99138-8338</p>
-                    <p><i class="fa fa-phone"></i> 99 99138-8338</p>
+                    <p><a href="https://api.whatsapp.com/send?phone=559991388338" target="_blank" style="text-decoration: none; color: inherit;"><i class="fa fa-whatsapp"></i> 99 99138-8338</a></p>
+                    <p><a href="tel:99991388338" style="text-decoration: none; color: inherit;"><i class="fa fa-phone"></i> 99 99138-8338</a></p>
                 </div>
 
                 <div class="home-opening-hours">
                     <span class="label">Funcionamento</span>
-                    <span class="hours">SÁBADOS e DOMINGOS das 10:40 até as 15:00</span>
+                    <span class="hours">TERÇA A DOMINGO das 18:00 até as 23:00</span>
                 </div>
 
                 <a href="#" class="btn-install-android">
@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            <button class="btn-logout"><i class="fa fa-power-off"></i> Fazer logoff</button>
+            <button class="btn-logout" onclick="fazerLogout()"><i class="fa fa-power-off"></i> Fazer logoff</button>
         </div>
 
 
@@ -322,6 +322,10 @@
         <script type="module" src="js/cart.js"></script>
         <script type="module" src="js/ui.js"></script>
         <script type="module">
+            import { fazerLogout } from './js/auth.js';
+            window.fazerLogout = fazerLogout;
+        </script>
+        <script type="module">
             import { calcularValorFrete, exibirResultadoFrete } from './js/frete.js';
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -362,9 +366,9 @@
                 <li class="divider"></li>
                 <li><a href="https://www.google.com/maps?q=R.+Arame,+289+-+Vilinha,+Imperatriz+-+MA,+65915-575" target="_blank"><i class="fa fa-map-marker"></i> Localização</a></li>
                 <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-phone"></i> Ligar</a></li>
+                <li><a href="tel:99991388338"><i class="fa fa-phone"></i> Ligar</a></li>
                 <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=559991388338" target="_blank"><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="fa fa-star-o"></i> Avaliações</a></li>
                 <li class="section-divider"></li>
@@ -379,7 +383,7 @@
                 <p>R. Arame, 289 - Vilinha, Imperatriz - MA, 65915-575</p>
 
                 <h4>Funcionamento</h4>
-                <p>SÁBADOS e DOMINGOS das 10:40 até as 15:00</p>
+                <p>TERÇA A DOMINGO das 18:00 até as 23:00</p>
 
                 <h4>Formas de pagamento</h4>
                 <p class="payment-note">* A disponibilidade das formas de pagamento pode mudar de acordo com o tipo do
@@ -410,8 +414,12 @@
                 const statusBadge = document.querySelector('.closed-badge');
 
                 // Lógica de horário embutida para evitar erros se o import falhar
-                const horaAtual = new Date().getHours();
-                const aberto = horaAtual >= 10 && horaAtual < 22;
+                const data = new Date();
+                const horaAtual = data.getHours();
+                const diaSemana = data.getDay(); // 0 (Dom) até 6 (Sab)
+                
+                // Aberto de Terça (2) a Domingo (0), exceto Segunda (1)
+                const aberto = diaSemana !== 1 && (horaAtual >= 18 && horaAtual < 23);
 
                 if (statusBadge) {
                     if (aberto) {
@@ -493,7 +501,7 @@
                 if (page === 'home') {
                     body.classList.add('home-active');
                     body.classList.remove('cardapio-active', 'conta-active', 'carrinho-active');
-                    document.getElementById('webapp-home').style.display = 'block';
+                    document.getElementById('webapp-home').style.display = 'flex';
                     items[0].classList.add('active');
                     document.title = "Kaká Lanches";
                     window.scrollTo(0, 0);

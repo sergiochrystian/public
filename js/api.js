@@ -4,12 +4,18 @@ import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/fir
 // Configuração da loja (será buscada do banco futuramente)
 const configLoja = {
     nome: "Feijoão Delivery",
-    horarioAbertura: 10,
-    horarioFechamento: 22
+    horarioAbertura: 18,
+    horarioFechamento: 23
 };
 
 export function estaAberto() {
-    const horaAtual = new Date().getHours();
+    const data = new Date();
+    const horaAtual = data.getHours();
+    const diaSemana = data.getDay(); // 0 (Domingo) até 6 (Sábado)
+
+    // Fechado na Segunda (dia 1)
+    if (diaSemana === 1) return false;
+
     return horaAtual >= configLoja.horarioAbertura && horaAtual < configLoja.horarioFechamento;
 }
 

@@ -68,8 +68,6 @@
     border-radius: 4px;
 }
 
-
-
 .orders-intro-text {
     font-size: 13px;
     color: #666;
@@ -84,7 +82,7 @@
 }
 
 .order-card {
-    border: 1px solid #eee;
+    border: 2px solid #E7ECF1;
     padding: 15px;
     border-radius: 0;
     background: #fff;

@@ -1451,7 +1451,7 @@ body.menu-open {
     padding: 20px;
     margin-bottom: 30px;
     /* Espaço que cria a "divisão" cinza */
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     /* Bordas ao redor de cada card */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -1488,7 +1488,7 @@ body.menu-open {
     padding: 20px;
     margin-bottom: 15px;
     /* Espaçamento real entre os cards */
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
     border-radius: 0;
 }
@@ -1534,7 +1534,7 @@ body.menu-open {
     background-color: #ffffff;
     padding: 30px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
     border-radius: 0;
 }
