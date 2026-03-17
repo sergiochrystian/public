@@ -98,8 +98,8 @@ export function renderizarItensCarrinho() {
 
         const itemHTML = `
             <div class="cart-item-row">
-                <div class="cart-item-info">
-                    <span class="cart-item-name">${item.nome}</span>
+                <span class="cart-item-name">${item.nome}</span>
+                <div class="cart-item-details">
                     <div class="cart-item-controls">
                         <button class="btn-qty minus" onclick="alterarQuantidade(${index}, -1)">
                             <i class="fa fa-minus-circle"></i>
@@ -109,9 +109,9 @@ export function renderizarItensCarrinho() {
                             <i class="fa fa-plus-circle"></i>
                         </button>
                     </div>
-                </div>
-                <div class="cart-item-price">
-                    R$ ${valorItem.toFixed(2).replace('.', ',')}
+                    <div class="cart-item-price">
+                        R$ ${valorItem.toFixed(2).replace('.', ',')}
+                    </div>
                 </div>
             </div>
         `;
@@ -140,6 +140,17 @@ window.alterarQuantidade = (index, delta) => {
             window.switchPage('carrinho');
         }
     }
+};
+
+window.fecharPedido = () => {
+    if (!estaAberto()) {
+        mostrarFeedbackErro();
+        return;
+    }
+
+    // Se estiver logado ou tiver dados, vai para o próximo passo (ex: checkout/login)
+    // Por enquanto enviamos para login para seguir o fluxo padrão
+    window.switchPage('login');
 };
 
 window.limparCarrinho = () => {

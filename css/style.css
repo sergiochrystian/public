@@ -28,6 +28,11 @@ body {
     display: flex;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 /* A Folha Branca (App) */
@@ -704,68 +709,68 @@ main {
     margin-bottom: 20px;
 }
 
+.cart-items-block-group {
+    background-color: #f2f5f7; /* Fundo cinza suave englobando tudo */
+    margin-bottom: 0;
+    padding-top: 15px; /* Espaço acima do título badge */
+}
+
 .cart-items-header {
     background-color: #000;
     color: #fff;
-    padding: 8px 15px;
+    padding: 10px 15px;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 500;
     display: inline-block;
-    margin-bottom: 0;
     position: relative;
     z-index: 10;
+    margin-left: -5px; /* Alinha o início da dobra com a lateral do card */
+    margin-bottom: 0;
 }
 
 .cart-items-header::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: -10px;
     left: 0;
     width: 0;
     height: 0;
-    border-top: 8px solid #000;
-    border-left: 8px solid transparent;
-    filter: brightness(0.5); /* Efeito de sombra na dobra */
+    border-top: 10px solid #000;
+    border-left: 10px solid transparent;
+    filter: brightness(0.4);
 }
 
 .cart-items-list {
-    border: 1px dashed #ccc;
+    border: none;
     padding: 15px;
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
+    background-color: transparent; /* Removido para usar o do grupo */
+    margin-bottom: 0;
 }
 
 .cart-item-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px dashed #ddd;
-}
-
-.cart-item-row:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.cart-item-info {
-    flex: 1;
+    flex-direction: column;
+    margin-bottom: 25px;
+    gap: 15px;
 }
 
 .cart-item-name {
     display: block;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
     color: #333;
-    margin-bottom: 5px;
+}
+
+.cart-item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cart-item-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .btn-qty {
@@ -773,13 +778,13 @@ main {
     border: none;
     padding: 0;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px; /* Diminuído para igualar ao exemplo */
     display: flex;
     align-items: center;
 }
 
-.btn-qty.minus { color: #dc3545; }
-.btn-qty.plus { color: #28a745; }
+.btn-qty.minus { color: #b20000; }
+.btn-qty.plus { color: #00A808; }
 
 .cart-item-qty {
     font-size: 14px;
@@ -790,24 +795,24 @@ main {
 }
 
 .cart-item-price {
-    font-size: 14px;
+    font-size: 16px; /* Levemente maior que o nome */
     font-weight: 400;
     color: #00A808;
     white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: 10px;
 }
 
 .cart-subtotal-row {
-    background-color: #4E4E4E;
+    background-color: #4b4b4b; /* Cinza escuro da inspiração */
     color: #fff;
-    padding: 8px 25px;
+    padding: 12px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+    margin-bottom: 30px;
 }
 
 .cart-divider-dashed {
@@ -826,8 +831,8 @@ main {
     background-color: #00A808;
     color: white;
     border: none;
-    padding: 8px;
-    font-size: 14px;
+    padding: 12px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -839,18 +844,18 @@ main {
 
 .cart-actions-row {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: column; /* Mobile: Um embaixo do outro */
+    gap: 10px;
 }
 
-.btn-cart-continue {
-    width: 100%;
+.btn-cart-continue, .btn-cart-clear {
+    width: 100%; /* No mobile ocupam largura total */
     background-color: #B20000;
     color: white;
     border: none;
-    padding: 8px;
+    padding: 12px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -858,19 +863,22 @@ main {
     gap: 8px;
 }
 
-.btn-cart-clear {
-    width: 100%;
-    background-color: #B20000;
-    color: white;
-    border: none;
-    padding: 8px;
-    font-size: 14px;
-    font-weight: 400;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+/* --- AJUSTES EXCLUSIVOS PARA DESKTOP --- */
+@media (min-width: 601px) {
+    .cart-actions-row {
+        flex-direction: row; /* No desktop ficam lado a lado */
+        gap: 10px;
+    }
+
+    .btn-cart-continue, .btn-cart-clear {
+        width: 50%; /* Cada um ocupa metade no desktop */
+        padding: 12px;
+    }
+
+    .btn-cart-finish {
+        padding: 15px;
+        font-size: 15px;
+    }
 }
 
 /* --- LOGIN PAGE --- */
@@ -1143,6 +1151,53 @@ main {
     font-size: 18px;
     margin-bottom: 25px;
     font-weight: 300;
+}
+
+/* --- MODAL ERRO (LOJA FECHADA) --- */
+.modal-error-card {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 15px;
+}
+
+.error-icon-circle {
+    width: 100px;
+    height: 100px;
+    border: 4px solid #fef0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #f56c6c; /* Vermelho Erro */
+}
+
+.modal-error-card h2 {
+    color: #595959;
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.modal-error-card p {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.btn-modal-erro {
+    background-color: #f56c6c;
+    color: #fff;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .confirm-buttons {
@@ -1427,22 +1482,18 @@ body.menu-open {
     margin-top: auto;
 }
 
-.deeliv-logo-text {
-    font-size: 9px;
-    color: #28a745;
-    font-weight: 700;
+.f5-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
-.deeliv-logo-text span {
-    display: block;
-    background: #00A808;
-    color: #fff;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 13px;
-    width: fit-content;
-    margin: 4px auto 0;
-    font-weight: 800;
+.f5-logo-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 12px; /* Adicionado para arredondar os cantos */
 }
 
 /* --- COMPONENTES COMPARTILHADOS --- */
@@ -1459,14 +1510,19 @@ body.menu-open {
 .portlet-title {
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ebebeb;
     padding-bottom: 15px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #333;
+    color: #2F353B;
+}
+
+#webapp-conta .portlet-title i {
+    color: #3f444a;
+    font-size: 18px;
 }
 
 /* --- TELA MINHA CONTA --- */
@@ -1651,20 +1707,20 @@ body.menu-open {
 }
 
 .btn-save {
-    background-color: #28a745;
+    background-color: #00A808;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 10px;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 /* MEUS ENDEREÇOS */
@@ -1673,12 +1729,12 @@ body.menu-open {
 }
 
 .address-item {
-    background: #f0f2f5;
+    background: #f7f8f9;
     border: 1px solid #eee;
     border-radius: 0;
-    margin-bottom: 35px;
+    margin-bottom: 45px;
     position: relative;
-    padding: 25px 20px 20px 20px;
+    padding: 30px 20px 25px 20px;
 }
 
 .address-header {
@@ -1717,15 +1773,15 @@ body.menu-open {
 }
 
 .btn-delete-address {
-    background-color: #b00;
+    background-color: #b20000;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     width: 100%;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1736,17 +1792,17 @@ body.menu-open {
     background-color: #444;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 22px; /* Aumentado para dar a espessura da inspiração */
     width: 100%;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 0; /* Cantos quadrados como solicitado */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 40px;
 }
 
@@ -1775,17 +1831,32 @@ body.menu-open {
 
     /* Tela de conta no mobile mantém os portlets como cards sobre o fundo */
     #webapp-conta {
-        width: 100% !important;
-        padding: 0 10px !important;
+        width: 92% !important;
+        margin: 80px auto 140px auto !important;
+        padding: 0 !important;
         background-color: transparent !important;
         border: none !important;
+        box-sizing: border-box;
     }
 
     #webapp-conta .portlet {
         width: 100% !important;
-        padding: 15px !important;
-        margin-bottom: 15px !important;
-        border-radius: 4px;
+        padding: 25px 22px !important; /* Aumentado para garantir o respeito às margens internas */
+        margin-bottom: 20px !important;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box; /* Essencial para manter o conteúdo dentro do card */
+    }
+
+    /* Melhora o alinhamento do título para não colar nas bordas do card */
+    #webapp-conta .portlet-title {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #webapp-conta .btn-save {
+        width: 100%;
+        margin-top: 20px;
     }
 
     /* Reset Home para tela cheia */
