@@ -280,6 +280,12 @@
                             <label class="form-label">Bairro <span>*</span></label>
                             <select id="bairro" name="neighborhood" class="form-control" autocomplete="address-level3">
                                 <option value="">Selecione</option>
+                                <option value="Bacuri">Bacuri</option>
+                                <option value="Vilinha">Vilinha</option>
+                                <option value="Centro">Centro</option>
+                                <option value="Vila Nova">Vila Nova</option>
+                                <option value="Nova Imperatriz">Nova Imperatriz</option>
+                                <option value="Beira Rio">Beira Rio</option>
                             </select>
                         </div>
                         <div class="form-group col-4">
@@ -315,6 +321,26 @@
         <script type="module" src="js/api.js"></script>
         <script type="module" src="js/cart.js"></script>
         <script type="module" src="js/ui.js"></script>
+        <script type="module">
+            import { calcularValorFrete, exibirResultadoFrete } from './js/frete.js';
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const btnCalcular = document.querySelector('.btn-calculate-tax');
+                const bairroSelect = document.getElementById('bairro');
+
+                if (btnCalcular) {
+                    btnCalcular.addEventListener('click', () => {
+                        const bairro = bairroSelect.value;
+                        if (!bairro) {
+                            alert('Por favor, selecione um bairro primeiro.');
+                            return;
+                        }
+                        const valor = calcularValorFrete(bairro);
+                        exibirResultadoFrete(valor);
+                    });
+                }
+            });
+        </script>
 
 
 
@@ -334,7 +360,7 @@
                 <li class="section-divider"></li>
                 <li><a href="javascript:void(0)" onclick="switchPage('taxa-entrega'); toggleMenu();"><i class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
                 <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> Localização</a></li>
+                <li><a href="https://www.google.com/maps?q=R.+Arame,+289+-+Vilinha,+Imperatriz+-+MA,+65915-575" target="_blank"><i class="fa fa-map-marker"></i> Localização</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="fa fa-phone"></i> Ligar</a></li>
                 <li class="divider"></li>
@@ -350,7 +376,7 @@
 
             <div class="drawer-info">
                 <h4>Endereço</h4>
-                <p>AV. Getúlio Vargas, 3518, Bacanga - Imperatriz/MA</p>
+                <p>R. Arame, 289 - Vilinha, Imperatriz - MA, 65915-575</p>
 
                 <h4>Funcionamento</h4>
                 <p>SÁBADOS e DOMINGOS das 10:40 até as 15:00</p>
