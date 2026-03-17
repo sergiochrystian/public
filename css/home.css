@@ -47,7 +47,7 @@
 /* --- HOME SCREEN --- */
 #webapp-home {
     width: 100%;
-    min-height: calc(100vh - 60px); 
+    min-height: 100vh; 
     display: none;
     flex-direction: column;
     align-items: center;
@@ -56,8 +56,8 @@
     background-size: cover;
     background-position: center;
     position: relative;
-    padding-top: 60px;
-    padding-bottom: 70px;
+    padding-top: 60px;   /* Compensa o header fixo */
+    padding-bottom: 70px; /* Compensa o nav inferior fixo */
     box-sizing: border-box;
 }
 
@@ -85,7 +85,7 @@
 .home-logo-badge {
     max-width: 200px;
     height: auto;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Reduzi de 25px para 15px */
     filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 }
 
@@ -129,6 +129,7 @@
     letter-spacing: 0.5px;
 }
 
+/* --- BOTÃO ANDROID --- */
 .btn-install-android {
     background-color: #000;
     color: #fff;
@@ -140,6 +141,7 @@
     gap: 15px;
     text-decoration: none;
     transition: background 0.3s;
+    margin-top: 10px;
 }
 
 .btn-install-android:hover {
@@ -168,12 +170,23 @@
     letter-spacing: 1px;
 }
 
+/* Esconder botão no Mobile */
+@media (max-width: 768px) {
+    .btn-install-android {
+        display: none !important;
+    }
+}
+
+
+
 /* Ajustes de Visibilidade */
-#webapp-cardapio {
+#webapp-cardapio, #webapp-conta, #webapp-carrinho {
     display: none;
 }
 
 body.home-active #webapp-cardapio,
+body.home-active #webapp-conta,
+body.home-active #webapp-carrinho,
 body.home-active #cart-footer {
     display: none !important;
 }
@@ -182,7 +195,9 @@ body.home-active #webapp-home {
     display: flex;
 }
 
-body.cardapio-active #webapp-home {
+body.cardapio-active #webapp-home,
+body.cardapio-active #webapp-conta,
+body.cardapio-active #webapp-carrinho {
     display: none !important;
 }
 
@@ -191,6 +206,36 @@ body.cardapio-active #webapp-cardapio {
 }
 
 body.cardapio-active #cart-footer {
+    display: flex !important;
+    bottom: 50px;
+}
+
+body.conta-active #webapp-home,
+body.conta-active #webapp-cardapio,
+body.conta-active #webapp-carrinho {
+    display: none !important;
+}
+
+body.conta-active #webapp-conta {
+    display: block !important;
+}
+
+body.conta-active #cart-footer {
+    display: flex !important;
+    bottom: 50px;
+}
+
+body.carrinho-active #webapp-home,
+body.carrinho-active #webapp-cardapio,
+body.carrinho-active #webapp-conta {
+    display: none !important;
+}
+
+body.carrinho-active #webapp-carrinho {
+    display: block !important;
+}
+
+body.carrinho-active #cart-footer {
     display: flex !important;
     bottom: 50px;
 }

@@ -19,7 +19,7 @@ export async function fazerLogin() {
     const telefoneInput = document.querySelector('.form-control');
     const erroTexto = document.getElementById('telefone-error');
     const inputGroup = document.querySelector('.input-group');
-    let telefone = telefoneInput.value.replace(/\D/g, ''); 
+    let telefone = telefoneInput.value.replace(/\D/g, '');
 
     if (telefone.length < 10) {
         const modal = document.getElementById('modal-validacao');
@@ -87,7 +87,7 @@ function exibirTelaConfirmacao(telefonePuro, telefoneFormatado) {
 // Função para enviar o SMS via Firebase e mostrar o sucesso
 async function processarEnvioSMS(telefone, telefoneFormatado, metodo) {
     console.log("Selecionado método:", metodo);
-    
+
     // Transição imediata para a tela de código para o usuário ver a mudança
     exibirTelaVerificacaoCodigo(telefone, telefoneFormatado);
 
@@ -98,13 +98,13 @@ async function processarEnvioSMS(telefone, telefoneFormatado, metodo) {
     try {
         const confirmationResult = await signInWithPhoneNumber(auth, telefoneCompleto, appVerifier);
         window.confirmationResult = confirmationResult;
-        
+
         // Só mostra o modal de sucesso se o envio realmente acontecer
         exibirModalSucesso(telefoneFormatado, metodo);
         console.log("Mensagem enviada via " + metodo + " para: " + telefoneCompleto);
     } catch (error) {
         console.error("Erro ao enviar mensagem:", error);
-        
+
         // Reseta o reCAPTCHA para permitir nova tentativa
         if (window.recaptchaVerifier) {
             window.recaptchaVerifier.clear();
@@ -206,7 +206,7 @@ function exibirModalSucesso(telefoneFormatado, metodo) {
 function exibirTelaVerificacaoCodigo(telefonePuro, telefoneFormatado) {
     const portletBody = document.querySelector('.portlet-body.form');
     if (!portletBody) return;
-    
+
     portletBody.innerHTML = `
         <div class="confirmacao-container">
             <p class="confirmacao-msg" style="margin-bottom: 20px;">
@@ -260,11 +260,11 @@ function exibirTelaVerificacaoCodigo(telefonePuro, telefoneFormatado) {
         const interval = setInterval(() => {
             segundos--;
             if (timerElement) timerElement.innerText = segundos;
-            
+
             if (segundos <= 0) {
                 clearInterval(interval);
                 if (areaTimer) areaTimer.innerText = "Você já pode solicitar um novo código.";
-                
+
                 // REATIVA OS BOTÕES
                 [btnWhatsApp, btnSMS].forEach(btn => {
                     if (btn) {
@@ -404,7 +404,9 @@ function renderizarListaPedidos(pedidos) {
                     </div>
                 `).join('')}
             </div>
-            <div class="order-status-badge">${p.status}</div>
+            <div class="order-status-badge">
+                <i class="fa fa-list-ul"></i> ${p.status}
+            </div>
             <div class="order-actions">
                 <button class="btn-order-action"><i class="fa fa-star-o"></i> Avaliar</button>
                 <button class="btn-order-action" onclick="verAndamentoPedido('${p.id}')"><i class="fa fa-search"></i> Detalhes</button>
@@ -414,7 +416,7 @@ function renderizarListaPedidos(pedidos) {
     `).join('');
 }
 
-window.verAndamentoPedido = function(id) {
+window.verAndamentoPedido = function (id) {
     const listSec = document.getElementById('order-list-section');
     const trackSec = document.getElementById('order-tracking-section');
     const idBanner = document.getElementById('tracking-order-id');

@@ -2,7 +2,20 @@ import { estaAberto } from './api.js';
 import { mostrarFeedbackErro } from './ui.js';
 
 // Estado global do carrinho
-let carrinho = [];
+let carrinho = carregarCarrinho();
+
+function salvarCarrinho() {
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function carregarCarrinho() {
+    const salvo = localStorage.getItem('carrinho');
+    try {
+        return salvo ? JSON.parse(salvo) : [];
+    } catch (e) {
+        return [];
+    }
+}
 
 // Função principal exposta para o HTML
 export function adicionarAoCarrinho(itemOuId, quantidade = 1) {
@@ -38,6 +51,7 @@ export function adicionarAoCarrinho(itemOuId, quantidade = 1) {
     }
 
     console.log("Carrinho atualizado:", carrinho);
+    salvarCarrinho();
     atualizarRodape();
     mostrarFeedbackSucesso();
 }
@@ -45,7 +59,7 @@ export function adicionarAoCarrinho(itemOuId, quantidade = 1) {
 // Vincula ao window para o onclick do HTML dinâmico funcionar
 window.adicionarAoCarrinho = adicionarAoCarrinho;
 
-function atualizarRodape() {
+export function atualizarRodape() {
     const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
     const valorTotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
 
@@ -69,7 +83,7 @@ function mostrarFeedbackSucesso() {
     }
 }
 
-// Funções para renderizar a tela do carrinho (depois)
+// Funções para renderizar a tela do carrinho
 export function renderizarItensCarrinho() {
     const container = document.getElementById('lista-itens-carrinho');
     const resumoSubtotal = document.getElementById('resumo-subtotal');
@@ -83,27 +97,76 @@ export function renderizarItensCarrinho() {
         subtotal += valorItem;
 
         const itemHTML = `
-            <div class="item-carrinho-linha">
-                <div class="item-info">
-                    <span class="item-qtd">${item.quantidade}x</span>
-                    <span class="item-nome">${item.nome}</span>
+            <div class="cart-item-row">
+                <div class="cart-item-info">
+                    <span class="cart-item-name">${item.nome}</span>
+                    <div class="cart-item-controls">
+                        <button class="btn-qty minus" onclick="alterarQuantidade(${index}, -1)">
+                            <i class="fa fa-minus-circle"></i>
+                        </button>
+                        <span class="cart-item-qty">${item.quantidade}</span>
+                        <button class="btn-qty plus" onclick="alterarQuantidade(${index}, 1)">
+                            <i class="fa fa-plus-circle"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="item-preco-area">
-                    <span>R$ ${valorItem.toFixed(2).replace('.', ',')}</span>
-                    <button onclick="removerItem(${index})" class="btn-remove">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
+                <div class="cart-item-price">
+                    R$ ${valorItem.toFixed(2).replace('.', ',')}
                 </div>
             </div>
         `;
         container.innerHTML += itemHTML;
     });
 
-    if (resumoSubtotal) resumoSubtotal.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    if (resumoSubtotal) {
+        resumoSubtotal.innerText = `(=) R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    }
 }
+
+window.alterarQuantidade = (index, delta) => {
+    if (carrinho[index]) {
+        carrinho[index].quantidade += delta;
+        
+        if (carrinho[index].quantidade <= 0) {
+            carrinho.splice(index, 1);
+        }
+        
+        salvarCarrinho();
+        renderizarItensCarrinho();
+        atualizarRodape();
+        
+        // Se deletou o último item, volta para a mensagem de vazio
+        if (carrinho.length === 0) {
+            window.switchPage('carrinho');
+        }
+    }
+};
+
+window.limparCarrinho = () => {
+    const modal = document.getElementById('confirm-modal');
+    if (modal) modal.style.display = 'flex';
+};
+
+window.executarLimparCarrinho = () => {
+    carrinho = [];
+    salvarCarrinho();
+    renderizarItensCarrinho();
+    atualizarRodape();
+    window.switchPage('carrinho');
+    
+    const modal = document.getElementById('confirm-modal');
+    if (modal) modal.style.display = 'none';
+};
 
 window.removerItem = (index) => {
     carrinho.splice(index, 1);
+    salvarCarrinho();
     renderizarItensCarrinho();
     atualizarRodape();
+    if (carrinho.length === 0) {
+        window.switchPage('carrinho');
+    }
 };
+
+// Inicializa o rodapé no carregamento
+atualizarRodape();

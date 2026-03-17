@@ -18,7 +18,7 @@
 <body class="home-active">
     <div class="container-principal">
         <header id="store-header">
-            <div class="logo-container">
+            <div class="logo-container" onclick="switchPage('home')" style="cursor: pointer;">
                 <img src="assets/logo-kaka-lanches.png" id="store-logo" alt="Logo Loja">
             </div>
             <button id="menu-btn" class="material-symbols-outlined">
@@ -47,8 +47,7 @@
                         <span>INSTALAR APP</span>
                         <strong>android</strong>
                     </div>
-                </a>
-            </div>
+                </a>            </div>
         </div>
 
         <div id="webapp-cardapio">
@@ -87,8 +86,225 @@
             </div>
         </div>
 
+        <!-- TELA MINHA CONTA -->
+        <div id="webapp-conta">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <i class="fa fa-user-circle-o"></i> MINHA CONTA
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-row">
+                        <div class="form-group col-8">
+                            <label class="form-label">Identificação (Nome completo ou Razão social) <span class="required">*</span></label>
+                            <input type="text" class="form-control" value="Sérgio Chrystian">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Data de nascimento</label>
+                            <input type="text" id="nascimento-input" class="form-control" placeholder="__/__/____" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Documento (CPF ou CNPJ)</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label class="form-label">Telefone <span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="country-code">
+                                    <img src="https://flagcdn.com/w20/br.png" width="20" alt="BR"> +55 <i class="fa fa-caret-down"></i>
+                                </span>
+                                <input type="tel" class="form-control" value="99 99138-8338" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn-save"><i class="fa fa-check"></i> Salvar</button>
+                </div>
+            </div>
 
-        <footer id="cart-footer">
+            <div class="portlet light section-addresses">
+                <div class="portlet-title">
+                    <i class="fa fa-map-marker"></i> MEUS ENDEREÇOS
+                </div>
+                <div class="portlet-body">
+                    <div class="address-item">
+                        <div class="address-header">ENDEREÇO #1</div>
+                        <div class="address-content">
+                            <strong>Endereço:</strong><br>
+                            Rodovia BR-316, Holiday Inn - Coqueiro - Ananindeua/PA - Entregar na portaria, quarto 304
+                        </div>
+                        <button class="btn-delete-address"><i class="fa fa-times"></i> Excluir endereço</button>
+                    </div>
+
+                    <div class="address-item">
+                        <div class="address-header">ENDEREÇO #2</div>
+                        <div class="address-content">
+                            <strong>Endereço:</strong><br>
+                            Rua Sete de Setembro, 3518 - Bacuri - Imperatriz/MA - Próximo a conveniência do Arapongas
+                        </div>
+                        <button class="btn-delete-address"><i class="fa fa-times"></i> Excluir endereço</button>
+                    </div>
+
+                    <div class="address-item">
+                        <div class="address-header">ENDEREÇO #3</div>
+                        <div class="address-content">
+                            <strong>Endereço:</strong><br>
+                            Rua Osvaldo Cruz, 1091, A - Bacuri - Imperatriz/MA - Atrás do Mercantil FC
+                        </div>
+                        <button class="btn-delete-address"><i class="fa fa-times"></i> Excluir endereço</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-logout"><i class="fa fa-power-off"></i> Fazer logoff</button>
+        </div>
+
+
+        <!-- TELA CARRINHO -->
+        <div id="webapp-carrinho">
+            <div class="titulo-carrinho">
+                <div class="titulo-carrinho-text">
+                    <i class="fa fa-shopping-basket icone-carrinho"></i>
+                    <span>CARRINHO</span>
+                </div>
+            </div>
+
+            <!-- Carrinho Vazio -->
+            <div id="carrinho-vazio" class="carrinho-vazio-container">
+                <p>Que pena, você ainda não adicionou nada no carrinho :( ...</p>
+                <button class="btn-ver-cardapio" onclick="switchPage('cardapio')">
+                    <i class="fa fa-columns"></i> Ver cardápio
+                </button>
+            </div>
+
+            <!-- Carrinho com Itens -->
+            <div id="carrinho-com-itens" style="display: none;">
+                <!-- Barra de Passos -->
+                <div class="cart-steps">
+                    <div class="step active">
+                        <span class="step-num">1º</span>
+                        <span class="step-label">Passo</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2º</span>
+                        <span class="step-label">Passo</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3º</span>
+                        <span class="step-label">Passo</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">4º</span>
+                        <span class="step-label">Passo</span>
+                    </div>
+                </div>
+
+                <p class="cart-instruction">Verifique se os itens escolhidos estão de acordo com o seu pedido, corrija-os se necessário.</p>
+
+                <div class="cart-items-header">ITENS DO PEDIDO</div>
+
+                <div id="lista-itens-carrinho" class="cart-items-list">
+                    <!-- Itens serão renderizados aqui pelo JS -->
+                </div>
+
+                <div class="cart-subtotal-row">
+                    <span class="subtotal-label">Sub-total</span>
+                    <span class="subtotal-value" id="resumo-subtotal">(=) R$ 0,00</span>
+                </div>
+
+                <div class="cart-divider-dashed"></div>
+
+                <div class="cart-actions-column">
+                    <button class="btn-cart-finish" id="btn-fechar-pedido">
+                        <i class="fa fa-shopping-basket"></i> Fechar pedido
+                    </button>
+                    <div class="cart-actions-row">
+                        <button class="btn-cart-continue" onclick="switchPage('cardapio')">
+                            <i class="fa fa-plus-circle"></i> Continuar comprando
+                        </button>
+                        <button class="btn-cart-clear" onclick="limparCarrinho()">
+                            <i class="fa fa-trash"></i> Limpar carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TELA TAXA DE ENTREGA -->
+        <div id="webapp-taxa-entrega" style="display: none;">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <i class="fa fa-motorcycle"></i> TAXA DE ENTREGA
+                </div>
+                <div class="portlet-body">
+                    <div class="form-group">
+                        <label class="form-label">Seus endereços</label>
+                        <select class="form-control">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="form-label">CEP</label>
+                            <div class="cep-container">
+                                <input type="text" id="cep" name="postal-code" class="form-control" placeholder="00000-000" autocomplete="postal-code">
+                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" class="btn-cep-help" style="text-decoration: none; display: flex; align-items: center;">Não sabe o cep?</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row flex-mobile">
+                        <div class="form-group col-6">
+                            <label class="form-label">Endereço (rua, avenida, praça, etc) <span>*</span></label>
+                            <input type="text" id="rua" name="address" class="form-control" autocomplete="address-line1">
+                            <small class="form-hint">(?) Não digite o número da casa, digite apenas o nome da rua.</small>
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Número da casa</label>
+                            <input type="text" id="numero" name="house-number" class="form-control" autocomplete="address-line2">
+                            <small class="form-hint">(?) Digite apenas o número do endereço.</small>
+                        </div>
+                        <div class="form-group col-3">
+                            <label class="form-label">Complemento</label>
+                            <input type="text" id="complemento" name="complement" class="form-control" autocomplete="address-line3">
+                        </div>
+                    </div>
+
+                    <div class="form-row flex-mobile">
+                        <div class="form-group col-4">
+                            <label class="form-label">Bairro <span>*</span></label>
+                            <select id="bairro" name="neighborhood" class="form-control" autocomplete="address-level3">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Cidade <span>*</span></label>
+                            <input type="text" id="cidade" name="city" class="form-control" value="Imperatriz" readonly autocomplete="address-level2">
+                        </div>
+                        <div class="form-group col-4">
+                            <label class="form-label">Estado <span>*</span></label>
+                            <input type="text" id="estado" name="state" class="form-control" value="MA" readonly autocomplete="address-level1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ponto de referência</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <button class="btn-calculate-tax">
+                        <i class="fa fa-calculator"></i> Calcular
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer id="cart-footer" onclick="switchPage('carrinho')" style="cursor: pointer;">
             <div class="cart-info">
                 <div class="cart-badge">0</div>
                 <span>VER CARRINHO</span>
@@ -114,9 +330,9 @@
                         Home</a></li>
                 <li><a href="javascript:void(0)" onclick="switchPage('cardapio'); toggleMenu();"><i
                             class="fa fa-columns"></i> Cardápio</a></li>
-                <li><a href="#"><i class="fa fa-shopping-basket"></i> Carrinho</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('carrinho'); toggleMenu();"><i class="fa fa-shopping-basket"></i> Carrinho</a></li>
                 <li class="section-divider"></li>
-                <li><a href="#"><i class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('taxa-entrega'); toggleMenu();"><i class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> Localização</a></li>
                 <li class="divider"></li>
@@ -128,7 +344,7 @@
                 <li class="section-divider"></li>
                 <li><a href="login.html"><i class="fa fa-square-o"></i> Meus pedidos</a></li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-user-circle-o"></i> Minha conta</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('conta'); toggleMenu();"><i class="fa fa-user-circle-o"></i> Minha conta</a></li>
                 <li class="divider"></li>
             </ul>
 
@@ -226,7 +442,7 @@
                 <i class="fa fa-file-text-o"></i>
                 <span class="nav-label">Meus Pedidos</span>
             </button>
-            <button class="nav-item" onclick="window.location.href='login.html'">
+            <button class="nav-item" onclick="switchPage('conta')">
                 <i class="fa fa-user-circle-o"></i>
                 <span class="nav-label">Minha Conta</span>
             </button>
@@ -237,24 +453,83 @@
             window.switchPage = function (page) {
                 const body = document.body;
                 const items = document.querySelectorAll('.nav-item');
+                const sections = ['webapp-home', 'webapp-cardapio', 'webapp-conta', 'webapp-carrinho', 'webapp-taxa-entrega'];
 
                 // Remove active de todos
                 items.forEach(item => item.classList.remove('active'));
 
+                // Esconde todas as seções primeiro
+                sections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+
                 if (page === 'home') {
                     body.classList.add('home-active');
-                    body.classList.remove('cardapio-active');
+                    body.classList.remove('cardapio-active', 'conta-active', 'carrinho-active');
+                    document.getElementById('webapp-home').style.display = 'block';
                     items[0].classList.add('active');
                     document.title = "Kaká Lanches";
                     window.scrollTo(0, 0);
                 } else if (page === 'cardapio') {
-                    body.classList.remove('home-active');
+                    body.classList.remove('home-active', 'conta-active', 'carrinho-active');
                     body.classList.add('cardapio-active');
+                    document.getElementById('webapp-cardapio').style.display = 'block';
                     items[1].classList.add('active');
                     document.title = "Cardápio | Kaká Delivery";
                     window.scrollTo(0, 0);
+                } else if (page === 'conta') {
+                    body.classList.remove('home-active', 'cardapio-active', 'carrinho-active');
+                    body.classList.add('conta-active');
+                    document.getElementById('webapp-conta').style.display = 'block';
+                    items[3].classList.add('active');
+                    document.title = "Minha Conta | Kaká Delivery";
+                    window.scrollTo(0, 0);
+                } else if (page === 'carrinho') {
+                    body.classList.remove('home-active', 'cardapio-active', 'conta-active');
+                    body.classList.add('carrinho-active');
+                    document.getElementById('webapp-carrinho').style.display = 'block';
+                    document.title = "Carrinho | Kaká Delivery";
+                    window.scrollTo(0, 0);
+                    
+                    // Verifica se está vazio
+                    const badge = document.querySelector('.cart-badge');
+                    const vazioContainer = document.getElementById('carrinho-vazio');
+                    const comItensContainer = document.getElementById('carrinho-com-itens');
+                    
+                    if (badge && (badge.innerText === "0" || badge.innerText === "")) {
+                        if (vazioContainer) vazioContainer.style.display = 'block';
+                        if (comItensContainer) comItensContainer.style.display = 'none';
+                    } else {
+                        if (vazioContainer) vazioContainer.style.display = 'none';
+                        if (comItensContainer) comItensContainer.style.display = 'block';
+                        // Chama a renderização dinâmica
+                        if (window.renderizarItensCarrinho) window.renderizarItensCarrinho();
+                    }
+                } else if (page === 'taxa-entrega') {
+                    body.classList.remove('home-active', 'cardapio-active', 'conta-active', 'carrinho-active');
+                    body.classList.add('taxa-entrega-active');
+                    document.getElementById('webapp-taxa-entrega').style.display = 'block';
+                    document.title = "Taxa de Entrega | Kaká Delivery";
+                    window.scrollTo(0, 0);
+                    
+                    // Exibe rodapé se tiver itens
+                    const footer = document.getElementById('cart-footer');
+                    const badge = document.querySelector('.cart-badge');
+                    if (footer && badge && parseInt(badge.innerText) > 0) {
+                        footer.style.display = 'flex';
+                    }
                 }
             };
+
+            // Lógica para carregar página específica via URL
+            document.addEventListener('DOMContentLoaded', () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const page = urlParams.get('page');
+                if (page) {
+                    window.switchPage(page);
+                }
+            });
         </script>
         <!-- Modal de Sucesso (Adicionado ao Carrinho) -->
         <div id="success-modal" class="modal-overlay">
@@ -272,6 +547,123 @@
             window.closeSuccessModal = function () {
                 document.getElementById('success-modal').style.display = 'none';
             }
+        </script>
+
+        <!-- Modal de Confirmação (Limpar Carrinho) -->
+        <div id="confirm-modal" class="modal-overlay">
+            <div class="modal-confirm-card">
+                <div class="confirm-icon-circle">
+                    <span style="font-size: 60px; font-weight: 300;">!</span>
+                </div>
+                <p class="confirm-text">Você tem certeza que deseja esvaziar o carrinho?</p>
+                <div class="confirm-buttons">
+                    <button class="btn-confirm-no" onclick="closeConfirmModal()">Não</button>
+                    <button class="btn-confirm-yes" onclick="executarLimparCarrinho()">Sim</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            window.closeConfirmModal = function() {
+                document.getElementById('confirm-modal').style.display = 'none';
+            }
+        </script>
+        <script>
+            // Máscara para Data de Nascimento
+            (function () {
+                const input = document.getElementById('nascimento-input');
+                if (!input) return;
+
+                input.addEventListener('keydown', function (e) {
+                    const permitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
+                    if (!permitidas.includes(e.key) && !e.ctrlKey && !e.metaKey && !/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                input.addEventListener('input', function (e) {
+                    let v = e.target.value.replace(/\D/g, '');
+                    let res = "";
+                    if (v.length > 0) {
+                        res = v.substring(0, 2);
+                        if (v.length > 2) res += "/" + v.substring(2, 4);
+                        if (v.length > 4) res += "/" + v.substring(4, 8);
+                    }
+                    e.target.value = res;
+                });
+            })();
+        </script>
+        <script type="module">
+            import { renderizarItensCarrinho } from './js/cart.js';
+            window.renderizarItensCarrinho = renderizarItensCarrinho;
+        </script>
+        <script>
+            // Lógica de CEP Automático
+            (function() {
+                const cepInput = document.getElementById('cep');
+                const ruaInput = document.getElementById('rua');
+                const bairroSelect = document.getElementById('bairro');
+                const cidadeInput = document.getElementById('cidade');
+                const estadoInput = document.getElementById('estado');
+
+                if (!cepInput) return;
+
+                // Máscara do CEP
+                cepInput.addEventListener('input', (e) => {
+                    let v = e.target.value.replace(/\D/g, '');
+                    if (v.length > 8) v = v.substring(0, 8);
+                    if (v.length > 5) {
+                        v = v.substring(0, 5) + '-' + v.substring(5);
+                    }
+                    e.target.value = v;
+
+                    // Busca o CEP quando preenchido
+                    if (v.replace('-', '').length === 8) {
+                        buscarCEP(v.replace('-', ''));
+                    }
+                });
+
+                async function buscarCEP(cep) {
+                    try {
+                        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                        const data = await response.json();
+
+                        if (data.erro) {
+                            console.error('CEP não encontrado');
+                            return;
+                        }
+
+                        // Preenche os campos
+                        if (ruaInput) ruaInput.value = data.logradouro || '';
+                        if (cidadeInput) cidadeInput.value = data.localidade || 'Imperatriz';
+                        if (estadoInput) estadoInput.value = data.uf || 'MA';
+
+                        // Trata o campo Bairro
+                        if (bairroSelect && data.bairro) {
+                            // Verifica se o bairro já existe no select
+                            let exists = false;
+                            for (let i = 0; i < bairroSelect.options.length; i++) {
+                                if (bairroSelect.options[i].value === data.bairro) {
+                                    exists = true;
+                                    bairroSelect.selectedIndex = i;
+                                    break;
+                                }
+                            }
+
+                            // Se não existir, adiciona
+                            if (!exists) {
+                                const opt = document.createElement('option');
+                                opt.value = data.bairro;
+                                opt.text = data.bairro;
+                                opt.selected = true;
+                                bairroSelect.add(opt);
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Erro ao buscar CEP:', error);
+                    }
+                }
+            })();
         </script>
     </div>
 </body>

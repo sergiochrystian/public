@@ -133,6 +133,7 @@ main {
     box-sizing: border-box;
     z-index: 1500;
     /* Acima de tudo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.229);
 }
 
 
@@ -185,7 +186,6 @@ main {
 /* Área de Tempo (Entrega/Retirada) */
 .info-time-container {
     margin-top: 25px;
-    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -430,7 +430,6 @@ main {
     margin-bottom: 10px;
 }
 
-
 /* FOOTER - Ajuste do Carrinho para não fugir da folha branca */
 
 /* FOOTER - Fixado no rodapé da tela, centralizado com o app */
@@ -451,8 +450,9 @@ main {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    border-top: 3px solid #fff;
+    /* border-top: 3px solid #fff; */
     z-index: 1000;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.229);
 }
 
 /* Garante que o badge (círculo) apareça corretamente */
@@ -590,8 +590,6 @@ main {
     display: block;
 }
 
-
-
 #cart-footer .cart-info span {
     font-weight: 300;
     /* mais fino */
@@ -602,6 +600,277 @@ main {
     font-weight: 300;
     /* mais fino */
     font-size: 14px;
+}
+
+/* --- CARRINHO PAGE --- */
+#webapp-carrinho {
+    width: 94%;
+    max-width: 860px;
+    margin: 90px auto 140px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    min-height: 28vh;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+.titulo-carrinho {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.titulo-carrinho-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icone-carrinho {
+    color: #666;
+    font-size: 15px;
+}
+
+.carrinho-vazio-container {
+    padding: 20px 2px;
+    text-align: center;
+}
+
+.carrinho-vazio-container p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.btn-ver-cardapio {
+    background-color: #00A808;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+.btn-ver-cardapio:hover {
+    background-color: #008f06;
+}
+
+/* PASSOS DO CARRINHO */
+.cart-steps {
+    display: flex;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.cart-steps .step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    color: #999;
+}
+
+.cart-steps .step.active {
+    background-color: #555;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.step-num {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.step-label {
+    font-size: 11px;
+}
+
+.cart-instruction {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.cart-items-header {
+    background-color: #000;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.cart-items-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #000;
+    border-left: 8px solid transparent;
+    filter: brightness(0.5); /* Efeito de sombra na dobra */
+}
+
+.cart-items-list {
+    border: 1px dashed #ccc;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.cart-item-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-qty {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-qty.minus { color: #dc3545; }
+.btn-qty.plus { color: #28a745; }
+
+.cart-item-qty {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    min-width: 20px;
+    text-align: center;
+}
+
+.cart-item-price {
+    font-size: 14px;
+    font-weight: 400;
+    color: #00A808;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.cart-subtotal-row {
+    background-color: #4E4E4E;
+    color: #fff;
+    padding: 8px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cart-divider-dashed {
+    border-top: 1px dashed #ccc;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.cart-actions-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-cart-finish {
+    background-color: #00A808;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.cart-actions-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-cart-continue {
+    width: 100%;
+    background-color: #B20000;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-cart-clear {
+    width: 100%;
+    background-color: #B20000;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 /* --- LOGIN PAGE --- */
@@ -644,7 +913,6 @@ main {
 
 .portlet-title i {
     color: #3f444a;
-    margin-right: 10px;
     font-size: 14px;
 }
 
@@ -845,6 +1113,60 @@ main {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* --- MODAL CONFIRMAÇÃO --- */
+.modal-confirm-card {
+    background: #fff;
+    width: 90%;
+    max-width: 450px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 15px;
+}
+
+.confirm-icon-circle {
+    width: 100px;
+    height: 100px;
+    border: 4px solid #fff4e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #ffb822; /* Amarelo/Laranja */
+}
+
+.confirm-text {
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-confirm-no, .btn-confirm-yes {
+    border: none;
+    padding: 8px 25px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    min-width: 80px;
+    border-radius: 2px;
+}
+
+.btn-confirm-no {
+    background-color: #d9534f; /* Vermelho */
+}
+
+.btn-confirm-yes {
+    background-color: #5cb85c; /* Verde */
 }
 
 /* --- FORM VERIFICACAO --- */
@@ -1123,6 +1445,311 @@ body.menu-open {
     font-weight: 800;
 }
 
+/* --- COMPONENTES COMPARTILHADOS --- */
+.portlet {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    /* Espaço que cria a "divisão" cinza */
+    border: 1px solid #ddd;
+    /* Bordas ao redor de cada card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.portlet-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+/* --- TELA MINHA CONTA --- */
+#webapp-conta {
+    width: 100%;
+    max-width: 900px;
+    /* Alinhado com a largura total do app */
+    margin: 90px auto 100px auto;
+    padding: 0 20px;
+    /* Padding apenas lateral para respiro dos cards */
+    box-sizing: border-box;
+    /* SEM background-color e bordas para mostrar o fundo cinza real do app */
+    min-height: 80vh;
+}
+
+/* Estilo real de Portlet (Card) como na imagem de exemplo */
+#webapp-conta .portlet {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 15px;
+    /* Espaçamento real entre os cards */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
+    border-radius: 0;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+.col-8 {
+    flex: 0 0 66.66%;
+}
+
+.col-6 {
+    flex: 0 0 calc(50% - 7.5px);
+}
+
+.col-4 {
+    flex: 0 0 calc(33.33% - 10px);
+}
+
+.col-3 {
+    flex: 0 0 calc(25% - 11px);
+}
+
+/* --- TELA TAXA DE ENTREGA --- */
+#webapp-taxa-entrega {
+    width: 100%;
+    max-width: 900px;
+    margin: 90px auto 100px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    min-height: 80vh;
+}
+
+#webapp-taxa-entrega .portlet {
+    background-color: #ffffff;
+    padding: 30px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
+    border-radius: 0;
+}
+
+.cep-container {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+}
+
+.cep-container .form-control {
+    flex: 1;
+}
+
+.btn-cep-help {
+    background-color: #4E4E4E;
+    color: #fff;
+    border: none;
+    padding: 0 20px;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.form-hint {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+.btn-calculate-tax {
+    background-color: #00A808;
+    color: #fff;
+    width: 100%;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.btn-calculate-tax:hover {
+    background-color: #008f06;
+}
+
+/* Responsividade para rows do formulário */
+@media (max-width: 600px) {
+    .form-row.flex-mobile {
+        flex-direction: column;
+        gap: 0;
+    }
+    .form-row.flex-mobile .form-group {
+        flex: 0 0 100%;
+        margin-bottom: 15px;
+    }
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.form-label .required {
+    color: red;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-control:read-only {
+    background-color: #f5f5f5;
+}
+
+.input-group {
+    display: flex;
+    align-items: stretch;
+}
+
+.country-code {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-right: none;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #333;
+    gap: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group .form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.btn-save {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* MEUS ENDEREÇOS */
+.section-addresses .portlet-body {
+    padding-top: 10px;
+}
+
+.address-item {
+    background: #f0f2f5;
+    border: 1px solid #eee;
+    border-radius: 0;
+    margin-bottom: 35px;
+    position: relative;
+    padding: 25px 20px 20px 20px;
+}
+
+.address-header {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    /* Faz a barra preta sair para fora do card branco */
+    background: #000;
+    color: #fff;
+    padding: 6px 15px;
+    /* Aumentei um pouco o preenchimento */
+    font-size: 11px;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.address-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    /* Posiciona exatamente na dobra */
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #222;
+    /* Cor mais escura para o efeito de sombra da dobra */
+    border-left: 10px solid transparent;
+    /* Cria o triângulo da dobra para fora */
+}
+
+.address-content {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.btn-delete-address {
+    background-color: #b00;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-logout {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
 @media (min-width: 900px) {
     .menu-drawer {
         max-width: 280px;
@@ -1141,8 +1768,24 @@ body.menu-open {
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         padding: 15px 15px 20px 15px !important;
+        background-color: #ffffff;
         /* Espaço exato para aparecer acima das duas barras */
         box-sizing: border-box;
+    }
+
+    /* Tela de conta no mobile mantém os portlets como cards sobre o fundo */
+    #webapp-conta {
+        width: 100% !important;
+        padding: 0 10px !important;
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    #webapp-conta .portlet {
+        width: 100% !important;
+        padding: 15px !important;
+        margin-bottom: 15px !important;
+        border-radius: 4px;
     }
 
     /* Reset Home para tela cheia */
@@ -1157,6 +1800,7 @@ body.menu-open {
     /* Ajuste para o header não cobrir o topo do card */
     #store-header {
         padding: 5px 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
 
     .info-time-container {
