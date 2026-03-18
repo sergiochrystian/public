@@ -1494,6 +1494,11 @@ body.menu-open {
     width: auto;
     object-fit: contain;
     border-radius: 12px; /* Adicionado para arredondar os cantos */
+    transition: transform 0.3s ease;
+}
+
+.f5-logo-container a:hover .f5-logo-img {
+    transform: scale(1.05);
 }
 
 /* --- COMPONENTES COMPARTILHADOS --- */
