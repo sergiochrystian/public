@@ -1,22 +1,17 @@
 import { db } from './firebase-init.js';
 import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { adicionarAoCarrinho } from './cart.js';
 
 // Configuração da loja (será buscada do banco futuramente)
 const configLoja = {
     nome: "Feijoão Delivery",
-    horarioAbertura: 18,
-    horarioFechamento: 23
+    horarioAbertura: 8,
+    horarioFechamento: 22
 };
 
 export function estaAberto() {
-    const data = new Date();
-    const horaAtual = data.getHours();
-    const diaSemana = data.getDay(); // 0 (Domingo) até 6 (Sábado)
-
-    // Fechado na Segunda (dia 1)
-    if (diaSemana === 1) return false;
-
-    return horaAtual >= configLoja.horarioAbertura && horaAtual < configLoja.horarioFechamento;
+    // Loja configurada para funcionamento 24h
+    return true;
 }
 
 
@@ -58,9 +53,16 @@ export async function carregarCardapio() {
         // Limpa novamente antes de renderizar os itens reais
         container.innerHTML = '';
 
-        // Ordenar as categorias para que 'FEIJOADA' venha antes de 'ADICIONAIS'
-        // Usamos reverse para que 'F' venha antes de 'A' na ordem alfabética reversa
-        const categoriasOrdenadas = Object.keys(categorias).sort().reverse();
+        // Definir a ordem específica: 1. FEIJOADA, 2. ADICIONAIS, 3. BEBIDAS
+        const ordemDefinida = {
+            'FEIJOADA': 1,
+            'ADICIONAIS (ACOMPANHAMENTOS)': 2,
+            'BEBIDAS': 3
+        };
+
+        const categoriasOrdenadas = Object.keys(categorias).sort((a, b) => {
+            return (ordemDefinida[a] || 99) - (ordemDefinida[b] || 99);
+        });
 
         for (const nomeCategoria of categoriasOrdenadas) {
             // Ordena os produtos de forma inteligente para manter a lógica original do cardápio
@@ -95,16 +97,19 @@ export async function carregarCardapio() {
                 </div>
                 <div class="category-content">
                     ${produtos.map(p => `
-                        <div class="product-card">
-                            <div class="product-content ${!p.imagem ? 'adicional-product-content' : ''}">
-                                ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}">` : ''}
-                                <div class="info">
+                        <div class="product-card" onclick="comprarProduto('${p.id}')" style="cursor: pointer;">
+                            <div class="product-content ${
+                                (p.categoria === 'ADICIONAIS (ACOMPANHAMENTOS)' && p.nome.includes('Arroz')) ? 'adicional-product-content' : 
+                                (p.categoria === 'BEBIDAS' ? 'bebida-product-content' : '')
+                            }">
+                                ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" style="pointer-events: none;">` : ''}
+                                <div class="info" style="pointer-events: none;">
                                     <h4>${p.nome}</h4>
                                     ${p.descricao ? `<p>${p.descricao}</p>` : ''}
                                     <span class="preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
                                 </div>
                             </div>
-                            <button class="btn-comprar" onclick="adicionarAoCarrinho('${p.id}')">+ COMPRAR</button>
+                            <button class="btn-comprar" onclick="event.stopPropagation(); comprarProduto('${p.id}')">+ COMPRAR</button>
                         </div>
                     `).join('')}
                 </div>
@@ -127,15 +132,81 @@ window.toggleCategoria = function (elemento) {
     const conteudo = elemento.nextElementSibling;
     const icone = elemento.querySelector('span');
 
-    // Fecha outros que estiverem abertos (opcional)
-    document.querySelectorAll('.category-content').forEach(el => {
-        if (el !== conteudo) {
-            el.classList.remove('active');
-            let prevIcon = el.previousElementSibling.querySelector('span');
-            if (prevIcon) prevIcon.innerText = '+';
-        }
-    });
-
     conteudo.classList.toggle('active');
     icone.innerText = conteudo.classList.contains('active') ? '-' : '+';
 };
+
+// --- LOGICA DE COMPRA DIRETA ---
+window.comprarProduto = function (id) {
+    const produto = window.produtosCache[id];
+    if (produto) {
+        adicionarAoCarrinho(produto, 1);
+    }
+};
+
+// --- LOGICA MODAL DETALHES ---
+let produtoAtualDetalhes = null;
+let quantidadeAtualDetalhes = 1;
+
+window.openProductDetails = function (id) {
+    const produto = window.produtosCache[id];
+    if (!produto) return;
+
+    produtoAtualDetalhes = produto;
+    quantidadeAtualDetalhes = 1;
+
+    // Preencher dados
+    const imgEl = document.getElementById('details-product-image');
+    if (imgEl) imgEl.src = produto.imagem || '';
+
+    const nameEl = document.getElementById('details-product-name');
+    if (nameEl) nameEl.innerText = produto.nome;
+
+    const descEl = document.getElementById('details-product-description');
+    if (descEl) descEl.innerText = produto.descricao || '';
+
+    const qtyEl = document.getElementById('detail-quantity');
+    if (qtyEl) qtyEl.innerText = quantidadeAtualDetalhes;
+
+    atualizarPrecoBotaoDetalhes();
+
+    // Mostrar modal
+    const modal = document.getElementById('modal-product-details');
+    if (modal) modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+};
+
+window.closeProductDetails = function () {
+    const modal = document.getElementById('modal-product-details');
+    if (modal) modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Destrava o scroll
+};
+
+window.changeDetailQuantity = function (delta) {
+    quantidadeAtualDetalhes += delta;
+    if (quantidadeAtualDetalhes < 1) quantidadeAtualDetalhes = 1;
+
+    const qtyEl = document.getElementById('detail-quantity');
+    if (qtyEl) qtyEl.innerText = quantidadeAtualDetalhes;
+    atualizarPrecoBotaoDetalhes();
+};
+
+function atualizarPrecoBotaoDetalhes() {
+    if (!produtoAtualDetalhes) return;
+    const total = produtoAtualDetalhes.preco * quantidadeAtualDetalhes;
+    const totalPriceEl = document.getElementById('details-product-total-price');
+    if (totalPriceEl) totalPriceEl.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+// Configurar o clique do botão de adicionar dentro do modal
+document.addEventListener('DOMContentLoaded', () => {
+    const btnAdd = document.getElementById('btn-add-detail');
+    if (btnAdd) {
+        btnAdd.onclick = function () {
+            if (produtoAtualDetalhes) {
+                adicionarAoCarrinho(produtoAtualDetalhes, quantidadeAtualDetalhes);
+                window.closeProductDetails();
+            }
+        };
+    }
+});

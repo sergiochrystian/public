@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuração WhatsApp - Delivery SaaS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .container { max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; background: #fff; font-family: sans-serif; }
+        .btn { padding: 10px 20px; background: #25D366; color: white; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; margin-bottom: 20px; }
+        .qrcode-container { text-align: center; padding: 20px; border: 2px dashed #ccc; min-height: 200px; }
+        .test-form { margin-top: 30px; display: grid; gap: 10px; border-top: 1px solid #eee; padding-top: 20px; }
+        .test-form input { padding: 8px; border: 1px solid #ccc; }
+        #log { margin-top: 20px; font-size: 12px; color: #666; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Sincronizar WhatsApp</h1>
+        <p>Use este painel para conectar seu celular à Evolution API (Docker) e testar mensagens de confirmação.</p>
+
+        <div id="step-1" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+            <button class="btn" onclick="startSetup()">1. Ativar/Conectar Instância</button>
+            <button class="btn" onclick="disconnectInstance()" style="background: #d32f2f;">Desconectar / Trocar Número</button>
+        </div>
+
+        <div id="qrcode-area" style="display: none;">
+            <h3>2. Escaneie este QR Code</h3>
+            <div class="qrcode-container">
+                <img id="qrcode-img" src="" alt="Aguardando QR Code..." style="max-width: 100%;">
+            </div>
+            <p><small>Aguarde o carregamento do código.</small></p>
+        </div>
+
+        <div class="test-form">
+            <h3>Testar Envio de Mensagem</h3>
+            <label>Nº WhatsApp (Ex: 5511999999999):</label>
+            <input type="text" id="test-number" placeholder="55 + DDD + Numero">
+            <label>Mensagem:</label>
+            <input type="text" id="test-msg" value="Seu código de confirmação no Delivery-SaaS é: 443321">
+            <button class="btn" onclick="triggerTestMessage()">Enviar Agora</button>
+        </div>
+
+        <div id="log">Logs de Status: <span id="log-status">Pronto.</span></div>
+    </div>
+
+    <script src="js/whatsapp.js?v=3"></script>
+    <script>
+        async function startSetup() {
+            document.getElementById('log-status').innerText = 'Criando instância... (pode levar alguns segundos)';
+            const data = await createInstance('delivery_bot_v2');
+            
+            document.getElementById('log-status').innerText = 'Aguardando o QR Code...';
+            fetchQRCodeLoop();
+        }
+
+        async function fetchQRCodeLoop() {
+            try {
+                const data = await getQRCode('delivery_bot_v2');
+                
+                if (data && data.base64) {
+                    document.getElementById('qrcode-img').src = data.base64;
+                    document.getElementById('qrcode-area').style.display = 'block';
+                    document.getElementById('log-status').innerText = 'Atenção: Escaneie o QR Code em até 40s!';
+                } else if (!data || (data && Object.keys(data).length === 0) || (data && data.instance && (data.instance.state === 'open' || data.instance.status === 'open'))) {
+                    if (data && data.error) {
+                        document.getElementById('log-status').innerText = 'Erro da API: ' + data.error;
+                    } else if (!data) {
+                        document.getElementById('log-status').innerText = 'Erro de CORS. Tente acessar aba anônima.';
+                    } else {
+                        document.getElementById('qrcode-area').style.display = 'none';
+                        document.getElementById('log-status').innerText = '🎉 WhatsApp JÁ CONECTADO!';
+                    }
+                } else {
+                    document.getElementById('log-status').innerText = 'Gerando QR Code...';
+                    setTimeout(fetchQRCodeLoop, 3000);
+                }
+            } catch (err) {
+                document.getElementById('log-status').innerText = 'Erro na conexao: ' + err.message;
+            }
+        }
+
+        async function disconnectInstance() {
+            if (!confirm('Tem certeza que deseja desconectar o WhatsApp atual? Você precisará ler o QR Code novamente.')) return;
+            
+            document.getElementById('log-status').innerText = 'Desconectando...';
+            try {
+                // Tenta logout e depois delete para garantir que a instância possa ser recriada
+                await fetch(`${EVOLUTION_URL}/instance/logout/delivery_bot_v2`, {
+                    method: 'POST',
+                    headers: { 'apikey': API_KEY }
+                });
+                await fetch(`${EVOLUTION_URL}/instance/delete/delivery_bot_v2`, {
+                    method: 'DELETE',
+                    headers: { 'apikey': API_KEY }
+                });
+                
+                document.getElementById('log-status').innerText = 'Desconectado com sucesso! Clique em "Ativar" para novo QR Code.';
+                document.getElementById('qrcode-area').style.display = 'none';
+                alert('WhatsApp desconectado. Agora você pode conectar um novo número.');
+            } catch (err) {
+                document.getElementById('log-status').innerText = 'Erro ao desconectar: ' + err.message;
+            }
+        }
+
+        async function triggerTestMessage() {
+            const num = document.getElementById('test-number').value;
+            const msg = document.getElementById('test-msg').value;
+            if (!num) return alert('Insira um número válido!');
+
+            document.getElementById('log-status').innerText = 'Enviando...';
+            const res = await sendMessage(num, msg);
+            
+            if (res && res.key) {
+                document.getElementById('log-status').innerText = '✓ Mensagem enviada com sucesso!';
+                alert('Mensagem enviada! Verifique seu WhatsApp.');
+            } else {
+                document.getElementById('log-status').innerText = '✗ Erro ao enviar (A instância está conectada?).';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -34,7 +34,7 @@ export async function calcularValorFrete(enderecoData) {
             console.log(`Tentando geocodificar com: ${query}`);
             const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`, {
                 headers: {
-                    'User-Agent': 'DeliverySaas-App-Kaka/1.1 (contato: sergio@exemplo.com)' 
+                    'User-Agent': 'DeliverySaas-App-FeijoAyla/1.1 (contato: sergio@exemplo.com)' 
                 }
             });
             

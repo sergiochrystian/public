@@ -4,30 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Kaká Delivery</title>
-    <link rel="icon" href="assets/logo-kaka-lanches.png" type="image/png">
+    <title>Login | FeijoAyla</title>
+    <link rel="icon" href="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body class="conta-active">
     <div class="container-principal">
         <header id="store-header">
             <div class="logo-container" id="header-logo-container">
                 <a href="index.html">
-                    <img src="assets/logo-kaka-lanches.png" id="store-logo" alt="Logo Loja">
+                    <img src="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" id="store-logo" alt="Logo Loja">
                 </a>
             </div>
             <div class="header-title-container" id="header-title-container"
                 style="display: none; flex-grow: 1; align-items: center;">
                 <a href="index.html"
                     style="color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px;">
-                    <i class="fa fa-angle-left" style="font-size: 24px;"></i>
-                    <img src="assets/logo-kaka-lanches.png" alt="Logo" style="height: 40px;">
+                    <img src="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" alt="Logo" style="height: 40px;">
                 </a>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
@@ -70,7 +70,6 @@
                     </div>
                 </div>
             </div>
-            <div id="recaptcha-container"></div>
         </div>
 
         <!-- TELA DE MEUS PEDIDOS (Dinamizada pelo auth.js) -->
@@ -93,17 +92,32 @@
                             a disponibilidade dos itens.
                         </p>
                         <div class="orders-grid" id="orders-container">
-                            <!-- Pedidos serão inseridos aqui -->
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div> <!-- Fim portlet-body -->
+                </div> <!-- Fim portlet light -->
+            </div> <!-- Fim order-list-section -->
 
             <!-- DETALHES / ANDAMENTO DO PEDIDO -->
             <div id="order-tracking-section" style="display: none;">
+                <!-- Box Pix Independente (Oculto por padrão, mostrado via JS se for Pix) -->
+                <div id="pix-tracking-box" class="pix-tracking-box" style="display: none; margin-bottom: 20px;">
+                    <div class="pix-header">DADOS PARA PIX</div>
+                    <div class="pix-body">
+                        <p>Chave para pagamento (CNPJ):</p>
+                        <p class="pix-key">30151600000111</p>
+                        <p>Titular da conta: João Guilherme Franco Lima da Costa - PAGSEGURO</p>
+                        <p class="pix-alert">(FAVOR ENVIAR O COMPROVANTE NA CONVERSA DO WHATSAPP!!!)</p>
+                        <p class="pix-total">TOTAL: R$ 0,00</p>
+                        <button class="btn-pix-whatsapp" id="btn-pix-whatsapp-tracking" style="background-color: #00A808; color: #fff; border-radius: 4px;">
+                            <i class="fa fa-whatsapp"></i> Enviar comprovante no WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Box de Andamento -->
                 <div class="portlet light">
                     <div class="portlet-title" id="tracking-title">
-                        <i class="fa fa-columns"></i> ANDAMENTO
+                        <i class="fa fa-list-ul"></i> ANDAMENTO
                     </div>
                     <div class="portlet-body">
                         <div class="tracking-id-banner" id="tracking-order-id">#PEDIDO S4SF7IXI</div>
@@ -125,9 +139,29 @@
                                 pedidos</button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> <!-- Fim portlet light de andamento -->
+            </div> <!-- Fim order-tracking-section -->
+        </div> <!-- Fim webapp-orders -->
+
+        <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="window.location.href='index.html?page=home'">
+                <i class="fa fa-home"></i>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='index.html?page=cardapio'">
+                <i class="fa fa-columns"></i>
+                <span class="nav-label">Ver Cardápio</span>
+            </button>
+            <button class="nav-item active" onclick="window.location.href='login.html'">
+                <i class="fa fa-file-text-o"></i>
+                <span class="nav-label">Meus Pedidos</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='index.html?page=conta'">
+                <i class="fa fa-user-circle-o"></i>
+                <span class="nav-label">Minha Conta</span>
+            </button>
+        </nav>
 
         <footer id="cart-footer" onclick="window.location.href='index.html?page=carrinho'" style="cursor: pointer;">
             <div class="cart-info">
@@ -136,6 +170,109 @@
             </div>
             <div class="cart-total">R$ 0,00</div>
         </footer>
+
+        <!-- Modal de Sucesso (Exibido após novo pedido ou aprovação Pix) -->
+        <div id="modal-sucesso-pedido" class="modal-overlay" style="display: none;">
+            <div class="modal-success-card" style="max-width: 420px; padding: 20px 15px; border-radius: 6px;">
+                <div id="success-icon-container" class="success-icon-circle" style="color: #28a745; border-color: #f2faf0; margin-bottom: 12px; width: 80px; height: 80px;">
+                    <span class="material-symbols-outlined" style="font-size: 40px;">check</span>
+                </div>
+                <h2 id="success-modal-title" style="margin-bottom: 10px; font-weight: 300; color: #595959; font-size: 22px;">Sucesso</h2>
+                
+                <div id="success-modal-body" style="font-size: 13px; line-height: 1.5; color: #797979; margin-bottom: 15px; text-align: center;">
+                    <p id="success-msg-default">Seu pedido foi enviado com sucesso para nosso estabelecimento, acompanhe o seu andamento!</p>
+                    
+                    <!-- Bloco Pix Extra (preenchido se for Pix) -->
+                    <div id="success-pix-details" style="display: none; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
+                        <p style="margin-bottom: 12px; font-size: 14px; color: #a5a5a5;">Seu pedido foi enviado com sucesso para o estabelecimento, realize o pix com os dados abaixo:</p>
+                        
+                        <p style="margin-bottom: 4px; font-size: 11px; color: #a5a5a5;">Chave para pagamento (CNPJ):</p>
+                        <p style="font-size: 14px; margin-bottom: 12px; color: #797979;">01.234.457/0001-89</p>
+                        
+                        <p style="font-size: 12px; color: #a5a5a5; margin-bottom: 12px;">Titular da conta: Sérgio Chrystian - PAGSEGURO</p>
+                        
+                        <p style="color: #a5a5a5; font-size: 12px; margin: 10px 0 !important;">(FAVOR ENVIAR O COMPROVANTE NA CONVERSA DO WHATSAPP!!!)</p>
+                        
+                        <p id="modal-total-pix" style="font-weight: bold; font-size: 14px; color: #575757; margin-top: 15px;">Total para o pix R$ 0,00</p>
+                    </div>
+                </div>
+
+                <button class="btn-modal-ok" id="btn-modal-sucesso-ok-new" style="background-color: #31a4ba; border: none; width: fit-content; min-width: 65px; border-radius: 4px; padding: 8px 20px; font-weight: bold; color: white; display: block; margin: 5px auto 0 auto; cursor: pointer; font-size: 14px;">OK</button>
+            </div>
+        </div>
+
+        <script>
+            window.closeOrderSuccessModal = function() {
+                const modal = document.getElementById('modal-sucesso-pedido');
+                if (modal) modal.style.display = 'none';
+
+                const url = new URL(window.location);
+                url.searchParams.delete('new_order');
+                url.searchParams.delete('id');
+                url.searchParams.delete('payment');
+                url.searchParams.delete('total');
+                window.history.replaceState({}, '', url);
+            }
+
+            document.getElementById('btn-modal-sucesso-ok-new').onclick = window.closeOrderSuccessModal;
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('new_order') === 'true') {
+                    // Esconde a lista IMEDIATAMENTE antes do auth.js povoar e mostrar
+                    const listSec = document.getElementById('order-list-section');
+                    if (listSec) listSec.style.display = 'none';
+
+                    const id = params.get('id');
+                    const payment = params.get('payment');
+                    window.currentOrderId = id;
+
+                    // Mostra o andamento do pedido e o modal de sucesso
+                    function inicializarNovoPedido() {
+                        const ordersView = document.getElementById('webapp-orders');
+                        if (ordersView) ordersView.style.setProperty('display', 'block', 'important');
+
+                        const trackSec = document.getElementById('order-tracking-section');
+                        if (trackSec) trackSec.style.setProperty('display', 'block', 'important');
+
+                        const listSec = document.getElementById('order-list-section');
+                        if (listSec) listSec.style.setProperty('display', 'none', 'important');
+
+                        // Aguarda carregar apenas a função. Os dados (cache) são tratados dentro dela.
+                        if (typeof window.verAndamentoPedido === 'function') {
+                            // 1. Processa o background primeiro (Rastreamento)
+                            window.verAndamentoPedido(id);
+                            
+                            // 2. Prepara o Modal de Sucesso (mantemos comentado por enquanto conforme pedido)
+                            if (payment === 'pix') {
+                                const defaultMsg = document.getElementById('success-msg-default');
+                                const pixBlock = document.getElementById('success-pix-details');
+                                const modalTotal = document.getElementById('modal-total-pix');
+                                
+                                if (defaultMsg) defaultMsg.style.display = 'none';
+                                if (pixBlock) pixBlock.style.display = 'block';
+                                if (modalTotal) {
+                                    const totalStr = params.get('total') || 'R$ 0,00';
+                                    modalTotal.innerText = `Total para o pix ${totalStr}`;
+                                }
+                            }
+
+                            // 3. Opcional: Mostra o Modal (DESATIVADO TEMPORARIAMENTE)
+                            /*
+                            setTimeout(() => {
+                                const modal = document.getElementById('modal-sucesso-pedido');
+                                if (modal) modal.style.display = 'flex';
+                            }, 300);
+                            */
+                        } else {
+                            setTimeout(inicializarNovoPedido, 100);
+                        }
+                    }
+
+                    inicializarNovoPedido();
+                }
+            });
+        </script>
 
         <!-- Modal de Erro de Validação -->
         <div id="modal-validacao" class="modal-alert" style="display: none;">
@@ -157,7 +294,7 @@
         <div id="menu-drawer" class="menu-drawer">
             <div class="drawer-header">
                 <button id="close-menu" class="material-symbols-outlined close-btn">close</button>
-                <img src="assets/logo-kaka-lanches.png" alt="Logo" class="drawer-logo">
+                <img src="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" alt="Logo" class="drawer-logo">
                 <div class="closed-badge">ESTAMOS FECHADOS</div>
             </div>
             <ul class="drawer-menu">

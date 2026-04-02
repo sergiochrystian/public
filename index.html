@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaká Lanches</title>
-    <link rel="icon" href="assets/logo-kaka-lanches.png" type="image/png">
+    <title>FeijoAyla - Delivery</title>
+    <link rel="icon" href="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet"
@@ -22,7 +22,7 @@
     <div class="container-principal">
         <header id="store-header">
             <div class="logo-container" onclick="switchPage('home')" style="cursor: pointer;">
-                <img src="assets/logo-kaka-lanches.png" id="store-logo" alt="Logo Loja">
+                <img src="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" id="store-logo" alt="Logo Loja">
             </div>
             <button id="menu-btn" class="material-symbols-outlined">
                 Menu <span class="menu-text">Menu</span>
@@ -32,16 +32,20 @@
         <!-- TELA HOME -->
         <div id="webapp-home">
             <div class="home-content">
-                <img src="assets/logo-kaka-lanches.png" alt="Logo Badge" class="home-logo-badge">
+                <img src="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" alt="Logo Badge"
+                    class="home-logo-badge">
 
                 <div class="home-contacts">
-                    <p><a href="https://api.whatsapp.com/send?phone=559991388338" target="_blank" style="text-decoration: none; color: inherit;"><i class="fa fa-whatsapp"></i> 99 99138-8338</a></p>
-                    <p><a href="tel:99991388338" style="text-decoration: none; color: inherit;"><i class="fa fa-phone"></i> 99 99138-8338</a></p>
+                    <p><a href="https://api.whatsapp.com/send?phone=559991388338" target="_blank"
+                            style="text-decoration: none; color: inherit;"><i class="fa fa-whatsapp"></i> 99
+                            99138-8338</a></p>
+                    <p><a href="tel:99991388338" style="text-decoration: none; color: inherit;"><i
+                                class="fa fa-phone"></i> 99 99138-8338</a></p>
                 </div>
 
                 <div class="home-opening-hours">
                     <span class="label">Funcionamento</span>
-                    <span class="hours">TERÇA A DOMINGO das 18:00 até as 23:00</span>
+                    <span class="hours">ABERTO 24h - Todos os dias</span>
                 </div>
 
                 <a href="#" class="btn-install-android">
@@ -50,7 +54,8 @@
                         <span>INSTALAR APP</span>
                         <strong>android</strong>
                     </div>
-                </a>            </div>
+                </a>
+            </div>
         </div>
 
         <div id="webapp-cardapio">
@@ -98,12 +103,14 @@
                 <div class="portlet-body form">
                     <div class="form-row flex-mobile">
                         <div class="form-group col-8">
-                            <label class="form-label">Identificação (Nome completo ou Razão social) <span class="required">*</span></label>
+                            <label class="form-label">Identificação (Nome completo ou Razão social) <span
+                                    class="required">*</span></label>
                             <input type="text" class="form-control" value="Sérgio Chrystian">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Data de nascimento</label>
-                            <input type="text" id="nascimento-input" class="form-control" placeholder="__/__/____" maxlength="10">
+                            <input type="text" id="nascimento-input" class="form-control" placeholder="__/__/____"
+                                maxlength="10">
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,7 +122,8 @@
                             <label class="form-label">Telefone <span class="required">*</span></label>
                             <div class="input-group">
                                 <span class="country-code">
-                                    <img src="https://flagcdn.com/w20/br.png" width="20" alt="BR"> +55 <i class="fa fa-caret-down"></i>
+                                    <img src="https://flagcdn.com/w20/br.png" width="20" alt="BR"> +55 <i
+                                        class="fa fa-caret-down"></i>
                                 </span>
                                 <input type="tel" class="form-control" value="99 99138-8338" readonly>
                             </div>
@@ -178,6 +186,7 @@
                     <span>CARRINHO</span>
                 </div>
             </div>
+            <div class="cart-divider-solid"></div>
 
             <!-- Carrinho Vazio -->
             <div id="carrinho-vazio" class="carrinho-vazio-container">
@@ -189,53 +198,489 @@
 
             <!-- Carrinho com Itens -->
             <div id="carrinho-com-itens" style="display: none;">
-                <!-- Barra de Passos -->
-                <div class="cart-steps">
-                    <div class="step active">
-                        <span class="step-num">1º</span>
-                        <span class="step-label">Passo</span>
+                <!-- Passo 1 -->
+                <div id="carrinho-passo1">
+                    <!-- Barra de Passos -->
+                    <div class="cart-steps">
+                        <div class="step active">
+                            <span class="step-num">1º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">2º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">3º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">4º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
                     </div>
-                    <div class="step">
-                        <span class="step-num">2º</span>
-                        <span class="step-label">Passo</span>
+
+                    <p class="cart-instruction">Verifique se os itens escolhidos estão de acordo com o seu pedido,
+                        corrija-os se necessário.</p>
+
+                    <div class="cart-items-block-group">
+                        <div class="cart-items-header">ITENS DO PEDIDO</div>
+
+                        <div id="lista-itens-carrinho" class="cart-items-list">
+                            <!-- Itens serão renderizados aqui pelo JS -->
+                        </div>
                     </div>
-                    <div class="step">
-                        <span class="step-num">3º</span>
-                        <span class="step-label">Passo</span>
+
+                    <div class="cart-subtotal-row">
+                        <span class="subtotal-label">Sub-total</span>
+                        <span class="subtotal-value" id="resumo-subtotal">(=) R$ 0,00</span>
                     </div>
-                    <div class="step">
-                        <span class="step-num">4º</span>
-                        <span class="step-label">Passo</span>
-                    </div>
-                </div>
 
-                <p class="cart-instruction">Verifique se os itens escolhidos estão de acordo com o seu pedido, corrija-os se necessário.</p>
+                    <div class="cart-divider-dashed"></div>
 
-                <div class="cart-items-block-group">
-                    <div class="cart-items-header">ITENS DO PEDIDO</div>
-
-                    <div id="lista-itens-carrinho" class="cart-items-list">
-                        <!-- Itens serão renderizados aqui pelo JS -->
-                    </div>
-                </div>
-
-                <div class="cart-subtotal-row">
-                    <span class="subtotal-label">Sub-total</span>
-                    <span class="subtotal-value" id="resumo-subtotal">(=) R$ 0,00</span>
-                </div>
-
-                <div class="cart-divider-dashed"></div>
-
-                <div class="cart-actions-column">
-                    <button class="btn-cart-finish" id="btn-fechar-pedido" onclick="fecharPedido()">
-                        <i class="fa fa-shopping-basket"></i> Fechar pedido
-                    </button>
-                    <div class="cart-actions-row">
-                        <button class="btn-cart-continue" onclick="switchPage('cardapio')">
-                            <i class="fa fa-plus-circle"></i> Continuar comprando
+                    <div class="cart-actions-column">
+                        <button class="btn-cart-finish" id="btn-fechar-pedido" onclick="verificarPedidoMinimoGeral()">
+                            <i class="fa fa-shopping-basket"></i> Fechar pedido
                         </button>
-                        <button class="btn-cart-clear" onclick="limparCarrinho()">
-                            <i class="fa fa-trash"></i> Limpar carrinho
+                        <div class="cart-actions-row">
+                            <button class="btn-cart-continue" onclick="switchPage('cardapio')">
+                                <i class="fa fa-plus-circle"></i> Continuar comprando
+                            </button>
+                            <button class="btn-cart-clear" onclick="limparCarrinho()">
+                                <i class="fa fa-trash"></i> Limpar carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passo 2 -->
+                <div id="carrinho-passo2" style="display: none;">
+                    <div class="cart-steps">
+                        <div class="step">
+                            <span class="step-num">1º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step active">
+                            <span class="step-num">2º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">3º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">4º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label class="form-label"
+                            style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                style="color:#555">Como deseja receber seu pedido?</span> *</label>
+                        <select id="tipo-recebimento" class="form-control"
+                            style="width: 100%; border: 1px solid #ddd; padding: 10px; color: #777; outline: none; background: #fff;">
+                            <option value="">Selecione</option>
+                            <option value="retirada">Retirada</option>
+                            <option value="entrega">Entrega</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label class="form-label"
+                            style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                style="color:#555">Tempo estimado</span> *</label>
+                        <div class="time-estimate-input-group"
+                            style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; background: #f4f6f9;">
+                            <span
+                                style="padding: 10px 15px; color: #555; background: #e9ecef; border-right: 1px solid #ddd; font-size: 14px;">De</span>
+                            <input type="text" id="tempo-minimo" value="" readonly
+                                style="min-width: 0; flex: 1; text-align: center; border: none; padding: 10px; background: #f4f6f9; color: #555; font-size: 14px; outline: none;">
+                            <span
+                                style="padding: 10px 15px; border-right: 1px solid #ddd; border-left: 1px solid #ddd; color: #555; background: #e9ecef; font-size: 14px;">à</span>
+                            <input type="text" id="tempo-maximo" value="" readonly
+                                style="min-width: 0; flex: 1; text-align: center; border: none; padding: 10px; background: #f4f6f9; color: #555; font-size: 14px; outline: none;">
+                            <span
+                                style="padding: 10px 15px; border-left: 1px solid #ddd; color: #555; background: #e9ecef; font-size: 14px;">minutos</span>
+                        </div>
+                    </div>
+
+                    <!-- Bloco de Endereço (Visto apenas em "Entrega") -->
+                    <div id="bloco-endereco" style="display: none; margin-top: 25px;">
+                        <p style="margin-bottom: 15px; color: #555; font-size: 14px; text-align: left;">Escolha o seu
+                            endereço:</p>
+
+                        <div class="address-options">
+                            <label class="address-radio-card"
+                                style="display: flex; align-items: center; border: 1px solid #ddd; padding: 15px; margin-bottom: 5px; cursor: pointer; background: #fff; font-size: 14px;">
+                                <input type="radio" name="endereco_selecionado" value="1"
+                                    style="margin-right: 15px; transform: scale(1.2);">
+                                <i class="fa fa-home" style="margin-right: 10px; color: #333; font-size: 16px;"></i>
+                                <span style="color: #555;">Rua Sete de Setembro, 3518 - Bacuri - Imperatriz/MA</span>
+                            </label>
+
+                            <label class="address-radio-card"
+                                style="display: flex; align-items: center; border: 1px solid #ddd; padding: 15px; margin-bottom: 5px; cursor: pointer; background: #fff; font-size: 14px;">
+                                <input type="radio" name="endereco_selecionado" value="2"
+                                    style="margin-right: 15px; transform: scale(1.2);">
+                                <i class="fa fa-home" style="margin-right: 10px; color: #333; font-size: 16px;"></i>
+                                <span style="color: #555;">Rua Osvaldo Cruz, 1091 - Bacuri - Imperatriz/MA</span>
+                            </label>
+
+                            <label class="address-radio-card"
+                                style="display: flex; align-items: center; border: 1px solid #ddd; padding: 15px; margin-bottom: 5px; cursor: pointer; background: #fff; font-size: 14px;">
+                                <input type="radio" name="endereco_selecionado" value="novo"
+                                    style="margin-right: 15px; transform: scale(1.2);" id="radio-novo-endereco">
+                                <span style="font-weight: bold; margin-right: 10px; font-size: 18px;">+</span>
+                                <span style="color: #555;">Novo endereço</span>
+                            </label>
+                        </div>
+
+                        <!-- Formulário de novo endereço -->
+                        <div id="form-novo-endereco" style="display: none; margin-top: 15px; text-align: left;">
+                            <div class="form-row" style="margin-bottom: 15px;">
+                                <div class="form-group col-12">
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">CEP</label>
+                                    <div class="cep-container" style="display: flex;">
+                                        <input type="text" id="cep-passo2" class="form-control" placeholder=""
+                                            style="flex: 1; border: 1px solid #ddd; padding: 10px; outline: none;">
+                                        <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+                                            target="_blank" class="btn-cep-help"
+                                            style="background: #555; color: #fff; text-decoration: none; padding: 10px 15px; display: flex; align-items: center; font-size: 14px;">Não
+                                            sabe o cep?</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row flex-mobile"
+                                style="display: flex; flex-wrap: wrap; margin-bottom: 15px;">
+                                <div class="form-group"
+                                    style="flex: 2; min-width: 200px; padding-right: 10px; margin-bottom: 10px;">
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                            style="color:#555">Endereço (rua, avenida, praça, etc)</span> *</label>
+                                    <input type="text" id="rua-passo2" class="form-control"
+                                        style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; box-sizing: border-box;">
+                                    <small class="form-hint"
+                                        style="color: #999; font-size: 12px; display: block; margin-top: 5px;">(?) Não
+                                        digite o número da casa, digite apenas o nome da rua.</small>
+                                </div>
+                                <div style="display: flex; flex: 1; min-width: 200px; gap: 10px;">
+                                    <div class="form-group" style="flex: 1; margin-bottom: 10px;">
+                                        <label class="form-label"
+                                            style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Número
+                                            da casa</label>
+                                        <input type="text" id="numero-passo2" class="form-control"
+                                            style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; box-sizing: border-box;">
+                                        <small class="form-hint"
+                                            style="color: #999; font-size: 12px; display: block; margin-top: 5px;">(?)
+                                            Digite apenas o número do endereço.</small>
+                                    </div>
+                                    <div class="form-group" style="flex: 1; margin-bottom: 10px;">
+                                        <label class="form-label"
+                                            style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Complemento</label>
+                                        <input type="text" id="complemento-passo2" class="form-control"
+                                            style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; box-sizing: border-box;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row flex-mobile"
+                                style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                                <div class="form-group" style="flex: 1; min-width: 120px;">
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Estado</label>
+                                    <select id="estado-passo2" class="form-control"
+                                        style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; background: #fff; color: #555; box-sizing: border-box;">
+                                        <option value="MA">Maranhão</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="flex: 1; min-width: 120px;">
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Cidade</label>
+                                    <select id="cidade-passo2" class="form-control"
+                                        style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; background: #fff; color: #555; box-sizing: border-box;">
+                                        <option value="Imperatriz">Imperatriz</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="flex: 1; min-width: 120px;">
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                            style="color:#555">Bairro</span> *</label>
+                                    <select id="bairro-passo2" class="form-control"
+                                        style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; background: #fff; color: #555; box-sizing: border-box;">
+                                        <option value="">Selecione</option>
+                                        <option value="Bacuri">Bacuri</option>
+                                        <option value="Vilinha">Vilinha</option>
+                                        <option value="Centro">Centro</option>
+                                        <option value="Vila Nova">Vila Nova</option>
+                                        <option value="Nova Imperatriz">Nova Imperatriz</option>
+                                        <option value="Beira Rio">Beira Rio</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="form-label"
+                                    style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Ponto de
+                                    referência</label>
+                                <input type="text" class="form-control"
+                                    style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; box-sizing: border-box;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-actions-row" style="margin-top: 25px; gap: 10px; display: flex;">
+                        <button class="btn-cart-back" onclick="irParaPasso(1)"
+                            style="flex: 1; padding: 12px; background: #e9ecef; border: none; color: #555; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            <i class="fa fa-chevron-left" style="margin-right: 5px; font-size: 12px;"></i> Voltar
+                        </button>
+                        <button class="btn-cart-next" onclick="verificarPedidoMinimo(3)"
+                            style="flex: 1; padding: 12px; background: #00A808; border: none; color: #fff; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            Avançar <i class="fa fa-chevron-right" style="margin-left: 5px; font-size: 12px;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Passo 3 -->
+                <div id="carrinho-passo3" style="display: none;">
+                    <div class="cart-steps">
+                        <div class="step">
+                            <span class="step-num">1º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">2º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step active">
+                            <span class="step-num">3º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">4º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row flex-mobile"
+                        style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 2; min-width: 250px;">
+                            <label class="form-label"
+                                style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                    style="color:#555">Qual seu nome completo?</span> *</label>
+                            <input type="text" id="nome-passo3" class="form-control" value="Sérgio Chrystian"
+                                style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; background: #f4f6f9; color: #555;">
+                        </div>
+                        <div class="form-group" style="flex: 1; min-width: 200px;">
+                            <label class="form-label"
+                                style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                    style="color:#555">Qual seu celular?</span> *</label>
+                            <div class="input-group"
+                                style="display: flex; border: 1px solid #ddd; background: #f4f6f9;">
+                                <span class="country-code"
+                                    style="padding: 10px; border-right: 1px solid #ddd; display: flex; align-items: center; gap: 5px; color: #555; background: #e9ecef; font-size: 14px;">
+                                    <img src="https://flagcdn.com/w20/br.png" width="20" alt="BR"> +55 <i
+                                        class="fa fa-caret-down"></i>
+                                </span>
+                                <input type="tel" id="celular-passo3" class="form-control" value="99 99138-8338"
+                                    readonly
+                                    style="flex: 1; border: none; padding: 10px; background: transparent; color: #555; outline: none; font-size: 14px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label class="form-label"
+                            style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                style="color:#555">Forma de pagamento</span> *</label>
+                        <select id="forma-pagamento" class="form-control"
+                            style="width: 100%; border: 1px solid #ddd; padding: 10px; color: #777; outline: none; background: #fff;">
+                            <option value="">Selecione</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="pix">Pix</option>
+                            <option value="debito">Cartão de débito</option>
+                            <option value="credito">Cartão de crédito</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo Troco (Oculto por padrão) -->
+                    <div id="bloco-troco" class="form-group" style="display: none; margin-bottom: 15px;">
+                        <label class="form-label"
+                            style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                style="color:#333; font-weight: bold;">Troco para R$ 0,00</span> *</label>
+                        <input type="text" id="troco-passo3" class="form-control" placeholder=""
+                            style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; box-sizing: border-box;">
+                        <small class="form-hint"
+                            style="color: #999; font-size: 12px; display: block; margin-top: 5px;">(?) Caso não precise
+                            de troco digite 0.</small>
+                    </div>
+
+                    <div class="form-row flex-mobile"
+                        style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 2; min-width: 250px;">
+                            <label class="form-label"
+                                style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Cupom</label>
+                            <div class="input-group" style="display: flex; border: 1px solid #ddd;">
+                                <input type="text" id="cupom-passo3" class="form-control"
+                                    style="flex: 1; border: none; padding: 10px; outline: none;">
+                                <button class="btn-resgatar"
+                                    style="background: #4b4b4b; color: #fff; border: none; padding: 10px 15px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa fa-tag"></i> Resgatar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group" style="flex: 1; min-width: 150px;">
+                            <label class="form-label"
+                                style="display: block; margin-bottom: 5px; color: #d0021b; font-size: 14px;"><span
+                                    style="color:#555">Desconto</span> *</label>
+                            <div class="input-group"
+                                style="display: flex; border: 1px solid #ddd; background: #f4f6f9;">
+                                <span
+                                    style="padding: 10px; color: #555; background: #e9ecef; border-right: 1px solid #ddd; font-size: 14px;">R$</span>
+                                <input type="text" id="desconto-passo3" value="0.00" readonly
+                                    style="flex: 1; border: none; padding: 10px; background: transparent; color: #555; outline: none; font-size: 14px; text-align: center;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label class="form-label"
+                            style="display: block; margin-bottom: 5px; color: #555; font-size: 14px;">Observações do seu
+                            pedido</label>
+                        <textarea id="observacoes-passo3" rows="3"
+                            style="width: 100%; border: 1px solid #ddd; padding: 10px; outline: none; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+
+                    <div class="cart-actions-row" style="margin-top: 25px; gap: 10px; display: flex;">
+                        <button class="btn-cart-back" onclick="irParaPasso(2)"
+                            style="flex: 1; padding: 12px; background: #e9ecef; border: none; color: #555; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            <i class="fa fa-chevron-left" style="margin-right: 5px; font-size: 12px;"></i> Voltar
+                        </button>
+                        <button class="btn-cart-next" onclick="finalizarPedido()"
+                            style="flex: 1; padding: 12px; background: #00A808; border: none; color: #fff; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            Avançar <i class="fa fa-chevron-right" style="margin-left: 5px; font-size: 12px;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Passo 4 -->
+                <div id="carrinho-passo4" style="display: none;">
+                    <div class="cart-steps">
+                        <div class="step">
+                            <span class="step-num">1º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">2º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">3º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                        <div class="step active">
+                            <span class="step-num">4º</span>
+                            <span class="step-label">Passo</span>
+                        </div>
+                    </div>
+
+                    <p class="cart-instruction" style="text-align: center; margin-top: 15px;">Verifique se esta tudo
+                        certo com o seu pedido e clique em confirmar.</p>
+
+                    <!-- SEÇÃO SEUS DADOS -->
+                    <div class="cart-items-block-group" style="padding-bottom: 25px; margin-top: 15px;">
+                        <div class="cart-items-header">SEUS DADOS</div>
+                        <div style="padding: 15px; text-align: left;">
+                            <div class="summary-item"
+                                style="margin-bottom: 12px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;">
+                                <strong style="display: block; font-size: 14px; margin-bottom: 4px; color: #333;">Tipo
+                                    de pedido:</strong>
+                                <span id="summary-tipo-pedido" style="font-size: 13px; color: #666;">Pedido para
+                                    entrega</span>
+                            </div>
+                            <div class="summary-item"
+                                style="margin-bottom: 12px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;">
+                                <strong
+                                    style="display: block; font-size: 14px; margin-bottom: 4px; color: #333;">Nome:</strong>
+                                <span id="summary-nome" style="font-size: 13px; color: #666;">Sérgio Chrystian</span>
+                            </div>
+                            <div class="summary-item"
+                                style="margin-bottom: 12px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;">
+                                <strong
+                                    style="display: block; font-size: 14px; margin-bottom: 4px; color: #333;">Telefone:</strong>
+                                <span id="summary-telefone" style="font-size: 13px; color: #666;">+55 99
+                                    99138-8338</span>
+                            </div>
+                            <div class="summary-item"
+                                style="margin-bottom: 12px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;">
+                                <strong
+                                    style="display: block; font-size: 14px; margin-bottom: 4px; color: #333;">Endereço:</strong>
+                                <span id="summary-endereco" style="font-size: 13px; color: #666;">Rua Sete de Setembro,
+                                    3518 - Bacuri - Imperatriz/MA - Próximo a conveniência do Arapongas</span>
+                            </div>
+                            <div class="summary-item">
+                                <strong style="display: block; font-size: 14px; margin-bottom: 4px; color: #333;">Tempo
+                                    estimado:</strong>
+                                <span id="summary-tempo-estimado" style="font-size: 13px; color: #666;">40 à 100
+                                    minutos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO ITENS DO PEDIDO -->
+                    <div class="cart-items-block-group" style="margin-top: 15px;">
+                        <div class="cart-items-header">ITENS DO PEDIDO</div>
+                        <div id="summary-itens-lista" style="padding: 15px; text-align: left;">
+                            <!-- Itens serão carregados dinamicamente via JS -->
+                        </div>
+
+                        <!-- TABELA DE RESUMO DARK -->
+                        <div style="background-color: #4b4b4b; color: #fff; padding: 15px; font-size: 14px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Sub-total</span>
+                                <span id="summary-subtotal">(=) R$ 0,00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Entrega</span>
+                                <span id="summary-entrega">(+) R$ 0,00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Desconto</span>
+                                <span id="summary-desconto">-</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Taxa pagto.</span>
+                                <span>-</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-weight: bold; font-size: 15px; margin-top: 5px; border-top: 1px solid #666; padding-top: 5px;">
+                                <span>Total</span>
+                                <span id="summary-total">(=) R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO FORMA DE PAGAMENTO -->
+                    <div class="cart-items-block-group" style="margin-top: 15px;">
+                        <div class="cart-items-header">FORMA DE PAGAMENTO</div>
+                        <div id="summary-pagamento"
+                            style="padding: 20px 15px; text-align: left; font-size: 14px; color: #555;">
+                            Cartão de crédito
+                        </div>
+                    </div>
+
+
+
+                    <div class="cart-actions-row" style="margin-top: 25px; gap: 10px; display: flex;">
+                        <button class="btn-cart-back" onclick="irParaPasso(3)"
+                            style="flex: 1; padding: 12px; background: #e9ecef; border: none; color: #555; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            <i class="fa fa-chevron-left" style="margin-right: 5px; font-size: 12px;"></i> Voltar
+                        </button>
+                        <button class="btn-cart-next" onclick="confirmarPedido()"
+                            style="flex: 1; padding: 12px; background: #00A808; border: none; color: #fff; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            Confirmar <i class="fa fa-check" style="margin-left: 5px; font-size: 14px;"></i>
                         </button>
                     </div>
                 </div>
@@ -260,8 +705,12 @@
                         <div class="form-group col-12">
                             <label class="form-label">CEP</label>
                             <div class="cep-container">
-                                <input type="text" id="cep" name="postal-code" class="form-control" placeholder="00000-000" autocomplete="postal-code">
-                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" class="btn-cep-help" style="text-decoration: none; display: flex; align-items: center;">Não sabe o cep?</a>
+                                <input type="text" id="cep" name="postal-code" class="form-control"
+                                    placeholder="00000-000" autocomplete="postal-code">
+                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank"
+                                    class="btn-cep-help"
+                                    style="text-decoration: none; display: flex; align-items: center;">Não sabe o
+                                    cep?</a>
                             </div>
                         </div>
                     </div>
@@ -269,17 +718,21 @@
                     <div class="form-row flex-mobile">
                         <div class="form-group col-6">
                             <label class="form-label">Endereço (rua, avenida, praça, etc) <span>*</span></label>
-                            <input type="text" id="rua" name="address" class="form-control" autocomplete="address-line1">
-                            <small class="form-hint">(?) Não digite o número da casa, digite apenas o nome da rua.</small>
+                            <input type="text" id="rua" name="address" class="form-control"
+                                autocomplete="address-line1">
+                            <small class="form-hint">(?) Não digite o número da casa, digite apenas o nome da
+                                rua.</small>
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Número da casa</label>
-                            <input type="text" id="numero" name="house-number" class="form-control" autocomplete="address-line2">
+                            <input type="text" id="numero" name="house-number" class="form-control"
+                                autocomplete="address-line2">
                             <small class="form-hint">(?) Digite apenas o número do endereço.</small>
                         </div>
                         <div class="form-group col-3">
                             <label class="form-label">Complemento</label>
-                            <input type="text" id="complemento" name="complement" class="form-control" autocomplete="address-line3">
+                            <input type="text" id="complemento" name="complement" class="form-control"
+                                autocomplete="address-line3">
                         </div>
                     </div>
 
@@ -298,11 +751,13 @@
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Cidade <span>*</span></label>
-                            <input type="text" id="cidade" name="city" class="form-control" value="Imperatriz" readonly autocomplete="address-level2">
+                            <input type="text" id="cidade" name="city" class="form-control" value="Imperatriz" readonly
+                                autocomplete="address-level2">
                         </div>
                         <div class="form-group col-4">
                             <label class="form-label">Estado <span>*</span></label>
-                            <input type="text" id="estado" name="state" class="form-control" value="MA" readonly autocomplete="address-level1">
+                            <input type="text" id="estado" name="state" class="form-control" value="MA" readonly
+                                autocomplete="address-level1">
                         </div>
                     </div>
 
@@ -350,12 +805,12 @@
                             cidade: document.getElementById('cidade').value,
                             estado: document.getElementById('estado').value
                         };
-                        
+
                         if (!enderecoData.rua || !enderecoData.bairro) {
                             alert('Por favor, preencha o nome da rua e o bairro.');
                             return;
                         }
-                        
+
                         // Muda visual do botão para carregando
                         const originalText = btnCalcular.innerHTML;
                         btnCalcular.innerHTML = '<i class="fa fa-spinner fa-spin"></i> CALCULANDO ...';
@@ -381,7 +836,7 @@
         <div id="menu-drawer" class="menu-drawer">
             <div class="drawer-header">
                 <button id="close-menu" class="material-symbols-outlined close-btn">close</button>
-                <img src="assets/logo-kaka-lanches.png" alt="Logo" class="drawer-logo">
+                <img src="assets/feijoayla/logo/logo-FeijoAyla-Preto-fundo-branco.png" alt="Logo" class="drawer-logo">
                 <div class="closed-badge">ESTAMOS FECHADOS</div>
             </div>
             <ul class="drawer-menu">
@@ -389,21 +844,26 @@
                         Home</a></li>
                 <li><a href="javascript:void(0)" onclick="switchPage('cardapio'); toggleMenu();"><i
                             class="fa fa-columns"></i> Cardápio</a></li>
-                <li><a href="javascript:void(0)" onclick="switchPage('carrinho'); toggleMenu();"><i class="fa fa-shopping-basket"></i> Carrinho</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('carrinho'); toggleMenu();"><i
+                            class="fa fa-shopping-basket"></i> Carrinho</a></li>
                 <li class="section-divider"></li>
-                <li><a href="javascript:void(0)" onclick="switchPage('taxa-entrega'); toggleMenu();"><i class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('taxa-entrega'); toggleMenu();"><i
+                            class="fa fa-motorcycle"></i> Taxa de entrega</a></li>
                 <li class="divider"></li>
-                <li><a href="https://www.google.com/maps?q=R.+Arame,+289+-+Vilinha,+Imperatriz+-+MA,+65915-575" target="_blank"><i class="fa fa-map-marker"></i> Localização</a></li>
+                <li><a href="https://www.google.com/maps?q=R.+Arame,+289+-+Vilinha,+Imperatriz+-+MA,+65915-575"
+                        target="_blank"><i class="fa fa-map-marker"></i> Localização</a></li>
                 <li class="divider"></li>
                 <li><a href="tel:99991388338"><i class="fa fa-phone"></i> Ligar</a></li>
                 <li class="divider"></li>
-                <li><a href="https://api.whatsapp.com/send?phone=559991388338" target="_blank"><i class="fa fa-whatsapp"></i> Whatsapp</a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=559991388338" target="_blank"><i
+                            class="fa fa-whatsapp"></i> Whatsapp</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="fa fa-star-o"></i> Avaliações</a></li>
                 <li class="section-divider"></li>
                 <li><a href="login.html"><i class="fa fa-square-o"></i> Meus pedidos</a></li>
                 <li class="divider"></li>
-                <li><a href="javascript:void(0)" onclick="switchPage('conta'); toggleMenu();"><i class="fa fa-user-circle-o"></i> Minha conta</a></li>
+                <li><a href="javascript:void(0)" onclick="switchPage('conta'); toggleMenu();"><i
+                            class="fa fa-user-circle-o"></i> Minha conta</a></li>
                 <li class="divider"></li>
             </ul>
 
@@ -412,7 +872,7 @@
                 <p>R. Arame, 289 - Vilinha, Imperatriz - MA, 65915-575</p>
 
                 <h4>Funcionamento</h4>
-                <p>TERÇA A DOMINGO das 18:00 até as 23:00</p>
+                <p>ABERTO 24h - Todos os dias</p>
 
                 <h4>Formas de pagamento</h4>
                 <p class="payment-note">* A disponibilidade das formas de pagamento pode mudar de acordo com o tipo do
@@ -428,7 +888,7 @@
             <div class="drawer-footer">
                 <div class="f5-logo-container">
                     <a href="https://www.instagram.com/f5designitz/" target="_blank">
-                        <img src="assets/logo-f5-designer.png" alt="F5 Designer" class="f5-logo-img">
+                        <img src="assets/logo-empresa/logo-f5-designer.png" alt="F5 Designer" class="f5-logo-img">
                     </a>
                 </div>
             </div>
@@ -447,9 +907,9 @@
                 const data = new Date();
                 const horaAtual = data.getHours();
                 const diaSemana = data.getDay(); // 0 (Dom) até 6 (Sab)
-                
-                // Aberto de Terça (2) a Domingo (0), exceto Segunda (1)
-                const aberto = diaSemana !== 1 && (horaAtual >= 18 && horaAtual < 23);
+
+                // Aberto 24h todos os dias
+                const aberto = true;
 
                 if (statusBadge) {
                     if (aberto) {
@@ -533,34 +993,34 @@
                     body.classList.remove('cardapio-active', 'conta-active', 'carrinho-active');
                     document.getElementById('webapp-home').style.display = 'flex';
                     items[0].classList.add('active');
-                    document.title = "Kaká Lanches";
+                    document.title = "FeijoAyla";
                     window.scrollTo(0, 0);
                 } else if (page === 'cardapio') {
                     body.classList.remove('home-active', 'conta-active', 'carrinho-active');
                     body.classList.add('cardapio-active');
                     document.getElementById('webapp-cardapio').style.display = 'block';
                     items[1].classList.add('active');
-                    document.title = "Cardápio | Kaká Delivery";
+                    document.title = "Cardápio | FeijoAyla";
                     window.scrollTo(0, 0);
                 } else if (page === 'conta') {
                     body.classList.remove('home-active', 'cardapio-active', 'carrinho-active');
                     body.classList.add('conta-active');
                     document.getElementById('webapp-conta').style.display = 'block';
                     items[3].classList.add('active');
-                    document.title = "Minha Conta | Kaká Delivery";
+                    document.title = "Minha Conta | FeijoAyla";
                     window.scrollTo(0, 0);
                 } else if (page === 'carrinho') {
                     body.classList.remove('home-active', 'cardapio-active', 'conta-active');
                     body.classList.add('carrinho-active');
                     document.getElementById('webapp-carrinho').style.display = 'block';
-                    document.title = "Carrinho | Kaká Delivery";
+                    document.title = "Carrinho | FeijoAyla";
                     window.scrollTo(0, 0);
-                    
+
                     // Verifica se está vazio
                     const badge = document.querySelector('.cart-badge');
                     const vazioContainer = document.getElementById('carrinho-vazio');
                     const comItensContainer = document.getElementById('carrinho-com-itens');
-                    
+
                     if (badge && (badge.innerText === "0" || badge.innerText === "")) {
                         if (vazioContainer) vazioContainer.style.display = 'block';
                         if (comItensContainer) comItensContainer.style.display = 'none';
@@ -569,14 +1029,16 @@
                         if (comItensContainer) comItensContainer.style.display = 'block';
                         // Chama a renderização dinâmica
                         if (window.renderizarItensCarrinho) window.renderizarItensCarrinho();
+                        // Volta para o passo 1 sempre que abrir o carrinho
+                        if (window.irParaPasso) window.irParaPasso(1);
                     }
                 } else if (page === 'taxa-entrega') {
                     body.classList.remove('home-active', 'cardapio-active', 'conta-active', 'carrinho-active');
                     body.classList.add('taxa-entrega-active');
                     document.getElementById('webapp-taxa-entrega').style.display = 'block';
-                    document.title = "Taxa de Entrega | Kaká Delivery";
+                    document.title = "Taxa de Entrega | FeijoAyla";
                     window.scrollTo(0, 0);
-                    
+
                     // Exibe rodapé se tiver itens
                     const footer = document.getElementById('cart-footer');
                     const badge = document.querySelector('.cart-badge');
@@ -596,158 +1058,347 @@
             });
         </script>
         <!-- Modal de Sucesso (Adicionado ao Carrinho) -->
-        <div id="success-modal" class="modal-overlay">
-            <div class="modal-success-card">
-                <div class="success-icon-circle">
-                    <span class="material-symbols-outlined" style="font-size: 50px;">check</span>
-                </div>
-                <h2>Sucesso</h2>
-                <p>Adicionado com sucesso ao carrinho!</p>
-                <button class="btn-modal-ok" onclick="closeSuccessModal()">OK</button>
-            </div>
-        </div>
+        <!-- Os modals foram movidos para o final do body para garantir o efeito full-screen -->
 
         <script>
-            window.closeSuccessModal = function () {
-                document.getElementById('success-modal').style.display = 'none';
-            }
-        </script>
-
-        <!-- Modal de Confirmação (Limpar Carrinho) -->
-        <div id="confirm-modal" class="modal-overlay">
-            <div class="modal-confirm-card">
-                <div class="confirm-icon-circle">
-                    <span style="font-size: 60px; font-weight: 300;">!</span>
-                </div>
-                <p class="confirm-text">Você tem certeza que deseja esvaziar o carrinho?</p>
-                <div class="confirm-buttons">
-                    <button class="btn-confirm-no" onclick="closeConfirmModal()">Não</button>
-                    <button class="btn-confirm-yes" onclick="executarLimparCarrinho()">Sim</button>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            window.closeConfirmModal = function() {
-                document.getElementById('confirm-modal').style.display = 'none';
-            }
-        </script>
-        
-        <!-- Modal de Erro (Loja Fechada) -->
-        <div id="modal-erro" class="modal-overlay">
-            <div class="modal-error-card">
-                <div class="error-icon-circle">
-                    <span class="material-symbols-outlined" style="font-size: 60px;">close</span>
-                </div>
-                <h2>Erro</h2>
-                <p>Que pena, no momento não estamos atendendo.</p>
-                <button class="btn-modal-erro" onclick="closeErrorModal()">OK</button>
-            </div>
-        </div>
-
-        <script>
-            window.closeErrorModal = function() {
+            window.closeErrorModal = function () {
                 document.getElementById('modal-erro').style.display = 'none';
             }
         </script>
+
+        <!-- Modal de Aviso Pagamento (Passo 3) -->
+        <div id="modal-aviso-pagamento" class="modal-overlay">
+            <div class="modal-success-card">
+                <div class="success-icon-circle" style="color: #ffb822; border-color: #fff4e5;">
+                    <span class="material-symbols-outlined" style="font-size: 50px;">priority_high</span>
+                </div>
+                <h2>Aviso</h2>
+                <p>Por favor, preencha o seu nome e escolha uma forma de pagamento.</p>
+                <button class="btn-modal-ok" onclick="closeAvisoPagamentoModal()">OK</button>
+            </div>
+        </div>
+
         <script>
-            // Máscara para Data de Nascimento
-            (function () {
-                const input = document.getElementById('nascimento-input');
-                if (!input) return;
+            window.closeAvisoPagamentoModal = function () {
+                document.getElementById('modal-aviso-pagamento').style.display = 'none';
+            }
+        </script>
 
-                input.addEventListener('keydown', function (e) {
-                    const permitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
-                    if (!permitidas.includes(e.key) && !e.ctrlKey && !e.metaKey && !/[0-9]/.test(e.key)) {
-                        e.preventDefault();
-                    }
-                });
+        <!-- Modal de Aviso Recebimento (Passo 2) -->
+        <div id="modal-aviso-recebimento" class="modal-overlay">
+            <div class="modal-success-card">
+                <div class="success-icon-circle" style="color: #ffb822; border-color: #fff4e5;">
+                    <span class="material-symbols-outlined" style="font-size: 50px;">priority_high</span>
+                </div>
+                <h2>Aviso</h2>
+                <p>Por favor, selecione como deseja receber o seu pedido (Retirada ou Entrega).</p>
+                <button class="btn-modal-ok" onclick="closeAvisoRecebimentoModal()">OK</button>
+            </div>
+        </div>
+        <script>
+            window.closeAvisoRecebimentoModal = function () {
+                document.getElementById('modal-aviso-recebimento').style.display = 'none';
+            }
+        </script>
 
-                input.addEventListener('input', function (e) {
-                    let v = e.target.value.replace(/\D/g, '');
-                    let res = "";
-                    if (v.length > 0) {
-                        res = v.substring(0, 2);
-                        if (v.length > 2) res += "/" + v.substring(2, 4);
-                        if (v.length > 4) res += "/" + v.substring(4, 8);
-                    }
-                    e.target.value = res;
-                });
-            })();
+
+        <!-- Modal de Aviso Endereço (Passo 2) -->
+        <div id="modal-aviso-endereco" class="modal-overlay">
+            <div class="modal-success-card">
+                <div class="success-icon-circle" style="color: #ffb822; border-color: #fff4e5;">
+                    <span class="material-symbols-outlined" style="font-size: 50px;">priority_high</span>
+                </div>
+                <h2>Aviso</h2>
+                <p>Por favor, selecione um endereço cadastrado ou preencha os dados do novo endereço para continuar.</p>
+                <button class="btn-modal-ok"
+                    onclick="document.getElementById('modal-aviso-endereco').style.display='none'">OK</button>
+            </div>
+        </div>
+        <script>
+                // Máscara para Data de Nascimento
+                (function () {
+                    const input = document.getElementById('nascimento-input');
+                    if (!input) return;
+
+                    input.addEventListener('keydown', function (e) {
+                        const permitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
+                        if (!permitidas.includes(e.key) && !e.ctrlKey && !e.metaKey && !/[0-9]/.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    });
+
+                    input.addEventListener('input', function (e) {
+                        let v = e.target.value.replace(/\D/g, '');
+                        let res = "";
+                        if (v.length > 0) {
+                            res = v.substring(0, 2);
+                            if (v.length > 2) res += "/" + v.substring(2, 4);
+                            if (v.length > 4) res += "/" + v.substring(4, 8);
+                        }
+                        e.target.value = res;
+                    });
+                })();
         </script>
         <script type="module">
             import { renderizarItensCarrinho } from './js/cart.js';
+            import { semearBanco } from './js/seed.js';
             window.renderizarItensCarrinho = renderizarItensCarrinho;
+            window.semearBanco = semearBanco;
         </script>
         <script>
             // Lógica de CEP Automático
-            (function() {
-                const cepInput = document.getElementById('cep');
-                const ruaInput = document.getElementById('rua');
-                const bairroSelect = document.getElementById('bairro');
-                const cidadeInput = document.getElementById('cidade');
-                const estadoInput = document.getElementById('estado');
+            (function () {
+                function setupAutocompleteCEP(cepId, ruaId, bairroId, cidadeId, estadoId) {
+                    const cepInput = document.getElementById(cepId);
+                    const ruaInput = document.getElementById(ruaId);
+                    const bairroSelect = document.getElementById(bairroId);
+                    const cidadeInput = document.getElementById(cidadeId);
+                    const estadoInput = document.getElementById(estadoId);
 
-                if (!cepInput) return;
+                    if (!cepInput) return;
 
-                // Máscara do CEP
-                cepInput.addEventListener('input', (e) => {
-                    let v = e.target.value.replace(/\D/g, '');
-                    if (v.length > 8) v = v.substring(0, 8);
-                    if (v.length > 5) {
-                        v = v.substring(0, 5) + '-' + v.substring(5);
-                    }
-                    e.target.value = v;
-
-                    // Busca o CEP quando preenchido
-                    if (v.replace('-', '').length === 8) {
-                        buscarCEP(v.replace('-', ''));
-                    }
-                });
-
-                async function buscarCEP(cep) {
-                    try {
-                        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-                        const data = await response.json();
-
-                        if (data.erro) {
-                            console.error('CEP não encontrado');
-                            return;
+                    // Máscara do CEP
+                    cepInput.addEventListener('input', (e) => {
+                        let v = e.target.value.replace(/\D/g, '');
+                        if (v.length > 8) v = v.substring(0, 8);
+                        if (v.length > 5) {
+                            v = v.substring(0, 5) + '-' + v.substring(5);
                         }
+                        e.target.value = v;
 
-                        // Preenche os campos
-                        if (ruaInput) ruaInput.value = data.logradouro || '';
-                        if (cidadeInput) cidadeInput.value = data.localidade || 'Imperatriz';
-                        if (estadoInput) estadoInput.value = data.uf || 'MA';
+                        // Busca o CEP quando preenchido
+                        if (v.replace('-', '').length === 8) {
+                            buscarCEP(v.replace('-', ''));
+                        }
+                    });
 
-                        // Trata o campo Bairro
-                        if (bairroSelect && data.bairro) {
-                            // Verifica se o bairro já existe no select
-                            let exists = false;
-                            for (let i = 0; i < bairroSelect.options.length; i++) {
-                                if (bairroSelect.options[i].value === data.bairro) {
-                                    exists = true;
-                                    bairroSelect.selectedIndex = i;
-                                    break;
+                    async function buscarCEP(cep) {
+                        try {
+                            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                            const data = await response.json();
+
+                            if (data.erro) {
+                                console.error('CEP não encontrado');
+                                return;
+                            }
+
+                            // Preenche os campos
+                            if (ruaInput) ruaInput.value = data.logradouro || '';
+                            if (cidadeInput) cidadeInput.value = data.localidade || 'Imperatriz';
+                            if (estadoInput) estadoInput.value = data.uf || 'MA';
+
+                            // Trata o campo Bairro
+                            if (bairroSelect && data.bairro) {
+                                // Verifica se o bairro já existe no select
+                                let exists = false;
+                                for (let i = 0; i < bairroSelect.options.length; i++) {
+                                    if (bairroSelect.options[i].value === data.bairro) {
+                                        exists = true;
+                                        bairroSelect.selectedIndex = i;
+                                        break;
+                                    }
+                                }
+
+                                // Se não existir, adiciona
+                                if (!exists) {
+                                    const opt = document.createElement('option');
+                                    opt.value = data.bairro;
+                                    opt.text = data.bairro;
+                                    opt.selected = true;
+                                    bairroSelect.add(opt);
                                 }
                             }
-
-                            // Se não existir, adiciona
-                            if (!exists) {
-                                const opt = document.createElement('option');
-                                opt.value = data.bairro;
-                                opt.text = data.bairro;
-                                opt.selected = true;
-                                bairroSelect.add(opt);
-                            }
+                        } catch (error) {
+                            console.error('Erro ao buscar CEP:', error);
                         }
-                    } catch (error) {
-                        console.error('Erro ao buscar CEP:', error);
                     }
                 }
+
+                // Iniciar para a página de Taxa de Entrega
+                setupAutocompleteCEP('cep', 'rua', 'bairro', 'cidade', 'estado');
+                // Iniciar para o Carrinho Passo 2 (Novo Endereço)
+                setupAutocompleteCEP('cep-passo2', 'rua-passo2', 'bairro-passo2', 'cidade-passo2', 'estado-passo2');
             })();
         </script>
+        <script>
+            // Lógica para exibição do bloco de endereço no Carrinho (Passo 2)
+            document.addEventListener('DOMContentLoaded', () => {
+                const tipoRecebimento = document.getElementById('tipo-recebimento');
+                const blocoEndereco = document.getElementById('bloco-endereco');
+                const radiosEndereco = document.querySelectorAll('input[name="endereco_selecionado"]');
+                const formNovoEndereco = document.getElementById('form-novo-endereco');
+                const tempoMinimo = document.getElementById('tempo-minimo');
+                const tempoMaximo = document.getElementById('tempo-maximo');
+
+                if (tipoRecebimento) {
+                    tipoRecebimento.addEventListener('change', (e) => {
+                        const valor = e.target.value;
+
+                        // Atualiza o bloco de endereços
+                        if (valor === 'entrega') {
+                            blocoEndereco.style.display = 'block';
+                        } else {
+                            blocoEndereco.style.display = 'none';
+                        }
+
+                        // Atualiza os minutos estimados
+                        if (valor === 'entrega') {
+                            tempoMinimo.value = "40";
+                            tempoMaximo.value = "100";
+                        } else if (valor === 'retirada') {
+                            tempoMinimo.value = "20";
+                            tempoMaximo.value = "40";
+                        } else {
+                            tempoMinimo.value = "";
+                            tempoMaximo.value = "";
+                        }
+                    });
+                }
+
+                if (radiosEndereco) {
+                    radiosEndereco.forEach(radio => {
+                        radio.addEventListener('change', (e) => {
+                            // Estilizar a borda do radio selecionado
+                            document.querySelectorAll('.address-radio-card').forEach(card => {
+                                card.style.borderColor = '#ddd';
+                            });
+                            e.target.closest('.address-radio-card').style.borderColor = '#007bff';
+
+                            // Mostrar formulário de novo endereço se selecionado
+                            if (e.target.value === 'novo') {
+                                formNovoEndereco.style.display = 'block';
+                            } else {
+                                formNovoEndereco.style.display = 'none';
+                            }
+                        });
+                    });
+                }
+            });
+        </script>
     </div>
+
+    <!-- MODALS (Fora do container principal para garantir 100% da tela) -->
+    
+
+    <!-- Modal de Sucesso -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-success-card">
+            <div class="success-icon-circle">
+                <span class="material-symbols-outlined" style="font-size: 50px;">check</span>
+            </div>
+            <h2>Sucesso</h2>
+            <p>Adicionado com sucesso ao carrinho!</p>
+            <button class="btn-modal-ok" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div id="modal-erro" class="modal-overlay">
+        <div class="modal-error-card">
+            <div class="error-icon-circle">
+                <span class="material-symbols-outlined" style="font-size: 60px;">close</span>
+            </div>
+            <h2>Erro</h2>
+            <p>Que pena, no momento não estamos atendendo.</p>
+            <button class="btn-modal-erro" onclick="closeErrorModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Erro Pedido Mínimo -->
+    <div id="modal-erro-pedido-minimo" class="modal-overlay">
+        <div class="modal-error-card">
+            <div class="error-icon-circle" style="color: #ea5455; border-color: #ea5455;">
+                <span class="material-symbols-outlined" style="font-size: 60px;">close</span>
+            </div>
+            <h2>Erro</h2>
+            <p id="texto-erro-pedido-minimo" style="font-size: 14px; margin-bottom: 20px; color: #555;">O pedido mínimo para ENTREGA é de R$ 20,00 ainda falta R$ 12,00.</p>
+            <button class="btn-modal-erro" onclick="closeErroPedidoMinimoModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal-confirm-card">
+            <div class="confirm-icon-circle">
+                <span style="font-size: 60px; font-weight: 300;">!</span>
+            </div>
+            <p class="confirm-text">Você tem certeza que deseja esvaziar o carrinho?</p>
+            <div class="confirm-buttons">
+                <button class="btn-confirm-no" onclick="closeConfirmModal()">Não</button>
+                <button class="btn-confirm-yes" onclick="executarLimparCarrinho()">Sim</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.closeSuccessModal = function () {
+            document.getElementById('success-modal').style.display = 'none';
+        }
+        window.closeConfirmModal = function () {
+            document.getElementById('confirm-modal').style.display = 'none';
+        }
+        window.closeErrorModal = function () {
+            document.getElementById('modal-erro').style.display = 'none';
+        }
+        window.closeErroPedidoMinimoModal = function () {
+            document.getElementById('modal-erro-pedido-minimo').style.display = 'none';
+        }
+
+        window.verificarPedidoMinimoGeral = function() {
+            const subtotalEl = document.getElementById('resumo-subtotal');
+            if (subtotalEl) {
+                const match = subtotalEl.textContent.match(/R\$\s*([\d,\.]+)/);
+                if (match) {
+                    let val = parseFloat(match[1].replace(/\./g, '').replace(',', '.'));
+                    if (val < 20) {
+                        const modalMin = document.getElementById('modal-erro-pedido-minimo');
+                        if (modalMin) {
+                            const p = document.getElementById('texto-erro-pedido-minimo');
+                            if (p) {
+                                let falta = 20 - val;
+                                p.innerText = `O pedido mínimo para ENTREGA é de R$ 20,00 ainda falta R$ ${falta.toFixed(2).replace('.', ',')}.`;
+                            }
+                            modalMin.style.display = 'flex';
+                        }
+                        return; // Bloqueia antes de abrir o Passo 2
+                    }
+                }
+            }
+            if (window.fecharPedido) {
+                window.fecharPedido();
+            }
+        };
+
+        window.verificarPedidoMinimo = function(passo) {
+            if (passo === 3) {
+                const tipo = document.getElementById('tipo-recebimento') ? document.getElementById('tipo-recebimento').value : '';
+                if (tipo === 'entrega') {
+                    const subtotalEl = document.getElementById('resumo-subtotal');
+                    if (subtotalEl) {
+                        const match = subtotalEl.textContent.match(/R\$\s*([\d,\.]+)/);
+                        if (match) {
+                            let val = parseFloat(match[1].replace(/\./g, '').replace(',', '.'));
+                            if (val < 20) {
+                                const modalMin = document.getElementById('modal-erro-pedido-minimo');
+                                if (modalMin) {
+                                    const p = document.getElementById('texto-erro-pedido-minimo');
+                                    if (p) {
+                                        let falta = 20 - val;
+                                        p.innerText = `O pedido mínimo para ENTREGA é de R$ 20,00 ainda falta R$ ${falta.toFixed(2).replace('.', ',')}.`;
+                                    }
+                                    modalMin.style.display = 'flex';
+                                }
+                                return; // Bloqueia e não avança
+                            }
+                        }
+                    }
+                }
+            }
+            if (window.irParaPasso) {
+                window.irParaPasso(passo);
+            }
+        };
+    </script>
 </body>
 
 </html>
