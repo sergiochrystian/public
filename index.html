@@ -1003,6 +1003,10 @@
                     document.title = "Cardápio | FeijoAyla";
                     window.scrollTo(0, 0);
                 } else if (page === 'conta') {
+                    if (localStorage.getItem('auth_loggedin') !== 'true') {
+                        window.location.href = 'login.html';
+                        return;
+                    }
                     body.classList.remove('home-active', 'cardapio-active', 'carrinho-active');
                     body.classList.add('conta-active');
                     document.getElementById('webapp-conta').style.display = 'block';
@@ -1278,7 +1282,7 @@
     </div>
 
     <!-- MODALS (Fora do container principal para garantir 100% da tela) -->
-    
+
 
     <!-- Modal de Sucesso -->
     <div id="success-modal" class="modal-overlay">
@@ -1311,7 +1315,8 @@
                 <span class="material-symbols-outlined" style="font-size: 60px;">close</span>
             </div>
             <h2>Erro</h2>
-            <p id="texto-erro-pedido-minimo" style="font-size: 14px; margin-bottom: 20px; color: #555;">O pedido mínimo para ENTREGA é de R$ 20,00 ainda falta R$ 12,00.</p>
+            <p id="texto-erro-pedido-minimo" style="font-size: 14px; margin-bottom: 20px; color: #555;">O pedido mínimo
+                para ENTREGA é de R$ 20,00 ainda falta R$ 12,00.</p>
             <button class="btn-modal-erro" onclick="closeErroPedidoMinimoModal()">OK</button>
         </div>
     </div>
@@ -1344,7 +1349,7 @@
             document.getElementById('modal-erro-pedido-minimo').style.display = 'none';
         }
 
-        window.verificarPedidoMinimoGeral = function() {
+        window.verificarPedidoMinimoGeral = function () {
             const subtotalEl = document.getElementById('resumo-subtotal');
             if (subtotalEl) {
                 const match = subtotalEl.textContent.match(/R\$\s*([\d,\.]+)/);
@@ -1369,7 +1374,7 @@
             }
         };
 
-        window.verificarPedidoMinimo = function(passo) {
+        window.verificarPedidoMinimo = function (passo) {
             if (passo === 3) {
                 const tipo = document.getElementById('tipo-recebimento') ? document.getElementById('tipo-recebimento').value : '';
                 if (tipo === 'entrega') {

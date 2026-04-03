@@ -134,7 +134,7 @@ function exibirTelaVerificacaoCodigo(telefonePuro, telefoneFormatado) {
 
             <div id="verificacao-form-area" style="margin-top: 0px; border-top: 1px solid #ebebeb; padding-top: 0px;">
                 <p class="timer-text" id="area-timer">
-                    Você precisa aguardar <strong id="timer-segundos">60</strong> segundos para solicitar um novo código.
+                    Você precisa aguardar <strong id="timer-segundos">120</strong> segundos para solicitar um novo código.
                 </p>
 
                 <div class="form-group" style="margin-top: 25px;">
@@ -158,12 +158,12 @@ function exibirTelaVerificacaoCodigo(telefonePuro, telefoneFormatado) {
         </div>
     `;
 
-    // Timer de reenvio (60 segundos)
+    // Timer de reenvio (120 segundos)
     const btnResend    = document.getElementById('btn-resend-whatsapp');
     const timerElement = document.getElementById('timer-segundos');
     const areaTimer    = document.getElementById('area-timer');
 
-    let segundos = 60;
+    let segundos = 120;
     const interval = setInterval(() => {
         segundos--;
         if (timerElement) timerElement.innerText = segundos;
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
 export async function fazerLogout() {
     localStorage.removeItem('auth_numero');
     localStorage.removeItem('auth_loggedin');
-    window.location.reload();
+    window.location.href = 'login.html';
 }
 
 // ─────────────────────────────────────────
